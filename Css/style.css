@@ -1,0 +1,9 @@
+.option {
+	min-height: 6em;
+	width: 100%;
+	color: white;
+	border-radius: 3px;
+}
+.alignv {
+	padding: 2.2em !important;
+}
