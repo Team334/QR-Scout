@@ -1,5 +1,8 @@
 # QR-Scout (at least for now)
 
+**Note:**
+This is not the full code. All files that are under the protected section of the site are hidden. For all code please contact me directly.
+
 ### Info:
 A QR based Scouting system for FRC. Made for mobile web.
 
@@ -16,3 +19,4 @@ A QR based Scouting system for FRC. Made for mobile web.
 
 ### ChangeLog:
 - Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1) **2/13/16**
+- Added items from [protected] (https://github.com/Team334/QR-Scout/tree/master/protected) folder that are nonsensitive **2/13/16**
