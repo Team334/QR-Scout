@@ -13,3 +13,6 @@ A QR based Scouting system for FRC. Made for mobile web.
 
 ### Outside Libraries Used:
 [WebCodeCam](https://github.com/andrastoth/WebCodeCam) for QR scanning.
+
+### ChangeLog:
+- Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1)
