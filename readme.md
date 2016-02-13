@@ -7,7 +7,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 	Scanning codes: 
 		A. Must be on Firefox for android
 			or
-		B. Have SSL cert. on domain
+		B. Have SSL cert. on domain (and then can be used on any browser)
 
 
 
