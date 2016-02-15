@@ -56,7 +56,7 @@
       <h3 class="name">
       </h3>
     </div>
-    <div id="Selection" class="center container">
+    <div id="teamSelection" class="center container">
         <div class='row option'>
             <a href="Recieve.php">
              <span class="option green recieve col s6 alignv">

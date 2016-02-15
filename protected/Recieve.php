@@ -78,16 +78,16 @@
                     <h4 style="width:50%;float:left;" class="white-text" >Receive Data</h4>
                     <span style="width:50%;float:right;">
                         <button id="save"  type="button" class="btn btn-info btn-sm disabled"><i class="fa fa-picture-o"></i></button>
-                        <button id="play"  type="button" class="btn btn-success btn green"><i class="fa fa-play"></i></button>
-                        <button id="stop"  type="button" class="btn btn-warning btn yellow darken-1"><i class="fa fa-pause"></i></button>
-                        <button id="stopAll" data-toggle="tooltip"  type="button" class="btn btn-danger btn red"><i class="fa fa-stop"></i></button>
+                        <button id="play"  type="button" class="btn btn-success btn green"><i class="fa fa-qrcode"></i></button>
+                        <button id="stop"  type="button" class="disabled btn btn-warning btn yellow darken-1"><i class="fa fa-pause"></i></button>
+                        <button id="stopAll" data-toggle="tooltip"  type="button" class="disabled btn btn-danger btn red"><i class="fa fa-stop"></i></button>
                     </span>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="col-md-6" style="text-align: center;">
                     <div class="well" style="position: relative;display: inline-block;">
-                        <canvas id="qr-canvas" width="320" height="240"></canvas>
+                        <canvas id="qr-canvas"></canvas>
                         <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
                         <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
                         <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>

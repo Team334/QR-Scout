@@ -23,6 +23,9 @@
 		$('[data-toggle="tooltip"]').tooltip();
 	sl.css('opacity', .5);
 	pl.click(function() {
+			sv.removeClass('disabled');
+			sp.removeClass('disabled');
+			spAll.removeClass('disabled');
 		if (typeof decoder.data().plugin_WebCodeCam == "undefined") {
 			decoder.WebCodeCam({
 				videoSource: {
@@ -50,14 +53,17 @@
 				}
 			});
 			sQ.text('Scanning ...');
-			sv.removeClass('disabled');
 			sp.click(function(event) {
 				sv.addClass('disabled');
+				sp.addClass('disabled');
+				spAll.addClass('disabled');
 				sQ.text('Stopped');
 				decoder.data().plugin_WebCodeCam.cameraStop();
 			});
 			spAll.click(function(event) {
 				sv.addClass('disabled');
+				sp.addClass('disabled');
+				spAll.addClass('disabled');
 				sQ.text('Stopped');
 				decoder.data().plugin_WebCodeCam.cameraStopAll();
 			});
