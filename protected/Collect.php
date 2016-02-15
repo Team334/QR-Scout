@@ -34,7 +34,6 @@
   <nav>
   <div class="nav-wrapper black">
     <a href="#!" class="brand-logo center">LARS</a>
-    <a href="#" data-activates="mobile" class="button-collapse"><i style="margin-left: 3px;" class="fa fa-bars"></i></a>
     <ul class="left hide-on-med-and-down">
       <li><a href="Interface.php">Home</a></li>
       <li><a href="Recieve.php">Recieve</a></li>
@@ -112,17 +111,28 @@
      </div>
  </div>
   <div id="ContToAuton">
-        <div id="StartAuton" class="topAuton hidden container center ">
+        <div id="StartAuton" class="topAuton hidden container center topel ">
             <div class="row">
               <h4>When Autonomous mode begins, please continue</h4>
-               <a class="Next startauton waves-effect waves-light btn col s12 green">Continue to autonomous mode</a>
+              <a class="Next startauton waves-effect waves-light btn col s12 green">Continue to autonomous mode</a>
             </div>
-       </div>
-       <div id="GenQR" class="hidden container center topel">
+        </div>
+        <div id="SelectTraps" class="hidden container center topel">
         <div class="row">
-          <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
-       </div>
-      </div>
+          <h5>Does the robot move during Autonomous mode? </h5>
+          <span title="AutonMove" class="option checkable Next col s12 btn">
+            <h4>Yes</h4>
+          </span>
+           <span title="AutonNoMove" class="option checkable waitfortele col s12 btn">
+            <h4>No</h4>
+          </span>
+        </div>
+     </div>
+  </div>
+  <div id="GenQR" class="hidden container center topel">
+    <div class="row">
+      <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
+   </div>
   </div>
   </content>
 </body>

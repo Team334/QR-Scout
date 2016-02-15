@@ -8,6 +8,8 @@
 	}
 	function changetimer(event) {
 		var timernum = event.data.timernum;
+		$(".brand-logo").html(timernum + " Seconds remaining");
+		timernum = 14;
 		var i =  setInterval(function() {
 			console.log(timernum);
 			var secremain = (timernum == 1 ) ? " Second remaining" : " Seconds remaining";
@@ -15,8 +17,12 @@
 			timernum--;
 			if (timernum < 0) {
 				clearInterval(i);
+				$("#ContToAuton").hide();
 			}
 		},1000);
+	}
+	function waitfortele () {
+		$("#ContToAuton").html('<h1 class="center">Please wait for Autonomous Mode to end</h1>');
 	}
 	function goaway() {
 		$(this).hide(400);
@@ -37,9 +43,10 @@ $(document).ready(function() {
 	$(".Next").click(next);
 	$(".goaway").click(goaway);
 	$(".contToAuton").click(contToAuton);
+	$(".waitfortele").click(waitfortele);
 	$(".startauton").click({timernum: 15}, changetimer);
 	$(".Gen").click(generate);
-	$("#nameNo").click(function(){window.location.href = 'logout.php';})
+	$("#nameNo").click(function(){window.location.href = 'Logout.php';})
 
 });
 //How to set item vars to collect
