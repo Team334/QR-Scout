@@ -105,14 +105,14 @@
           <span title="RockWall" class="option checkable goaway blue col s12 waves-effect waves-light btn">
             <h4>Rock Wall</h4>
           </span>
-          <span title="RoughTerrain" class="Next option goaway checkable blue col s12 waves-effect waves-light btn">
+          <span title="RoughTerrain" class="contToAuton option goaway checkable blue col s12 waves-effect waves-light btn">
             <h4>Rough Terrain</h4>
           </span>
         </div>
      </div>
  </div>
   <div id="ContToAuton">
-        <div id="StartAuton" class="hidden container center topel">
+        <div id="StartAuton" class="topAuton hidden container center ">
             <div class="row">
               <h4>When Autonomous mode begins, please continue</h4>
                <a class="Next startauton waves-effect waves-light btn col s12 green">Continue to autonomous mode</a>
