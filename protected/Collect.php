@@ -83,28 +83,28 @@
           <span title="LowBar" class="option selected disabled col s12 btn">
             <h4>Low Bar &#10003</h4>
           </span>
-          <span title="Portcullis" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="Portcullis" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Portcullis</h4>
           </span>
-          <span title="ChevalDF" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="ChevalDF" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Cheval de Frise</h4>
           </span>
-          <span title="Moat" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="Moat" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Moat</h4>
           </span>
-          <span title="Ramparts" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="Ramparts" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Ramparts</h4>
           </span>
-          <span title="Drawbridge" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="Drawbridge" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Drawbridge</h4>
           </span>
-          <span title="SallyPort" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="SallyPort" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Sally Port</h4>
           </span>
-          <span title="RockWall" class="option checkable goaway blue col s12 waves-effect waves-light btn">
+          <span title="RockWall" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
             <h4>Rock Wall</h4>
           </span>
-          <span title="RoughTerrain" class="option goaway checkable blue col s12 waves-effect waves-light btn lastpregame">
+          <span title="RoughTerrain" class="option checkabledef goaway blue col s12 waves-effect waves-light btn lastpregame">
             <h4>Rough Terrain</h4>
           </span>
         </div>
@@ -134,16 +134,16 @@
             <span class="defbreached">
               <h6>Defences Breached:</h6>
               <span class="options">
-                <a title="def1reached" class="checkable largebtn goaway waves-effect waves-light btn blue col s12">Lowbar</a>
-                <a title="def2reached" class="checkable largebtn goaway waves-effect waves-light btn green col s12"></a>
-                <a title="def3reached" class="checkable largebtn goaway waves-effect waves-light btn red col s12"></a>
-                <a title="def4reached" class="checkable largebtn goaway waves-effect waves-light btn black col s12"></a>
-                <a title="def5reached" class="checkable largebtn goaway waves-effect waves-light btn pink col s12"></a>
+                <a title="def1reached" class="autonbreach largebtn goaway waves-effect waves-light btn blue col s12">Lowbar</a>
+                <a title="def2reached" class="autonbreach largebtn goaway waves-effect waves-light btn green col s12"></a>
+                <a title="def3reached" class="autonbreach largebtn goaway waves-effect waves-light btn red col s12"></a>
+                <a title="def4reached" class="autonbreach largebtn goaway waves-effect waves-light btn black col s12"></a>
+                <a title="def5reached" class="autonbreach largebtn goaway waves-effect waves-light btn pink col s12"></a>
             </span>
           </span>
           </div>
           </div>
-          <div id="Shots" class="center" style="top: 68% !important; position: absolute !important;">
+          <div id="Shots" class="center" style="width: 100%;top: 68% !important; position: absolute !important;">
           <div class="row">
               <h6>Shots:</h6>
               <span class="options">

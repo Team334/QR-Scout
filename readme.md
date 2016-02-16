@@ -21,7 +21,8 @@ A QR based Scouting system for FRC. Made for mobile web.
 - Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1) **2/13/16**
 - Added items from [protected] (https://github.com/Team334/QR-Scout/tree/master/protected) folder that are nonsensitive **2/13/16** 
 - Minor Css Changes || Started Work on collect data page Hrly. Update 1 **2/15/16**
-- Collect.js changes (functions added) || Continued Work on collect data page Hrly. Update 1 **2/15/16**
+- Collect.js changes (functions added) || Continued Work on collect data page **2/15/16**
+- Collect.js changes (functions added) || Continued Work on collect data page **2/16/16**
 
 ### To Do list:
 	-Create Decoder for QR codes
