@@ -28,3 +28,5 @@ A QR based Scouting system for FRC. Made for mobile web.
 	-Create Decoder for QR codes
 		-If the same code is scanned twice then do not display data 
 	-Write js code for collect page
+
+**Special thanks to [Kevin](https://github.com/furryfaust)**
