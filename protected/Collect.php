@@ -104,20 +104,20 @@
           <span title="RockWall" class="option checkable goaway blue col s12 waves-effect waves-light btn">
             <h4>Rock Wall</h4>
           </span>
-          <span title="RoughTerrain" class="contToAuton option goaway checkable blue col s12 waves-effect waves-light btn">
+          <span title="RoughTerrain" class="option goaway checkable blue col s12 waves-effect waves-light btn lastpregame">
             <h4>Rough Terrain</h4>
           </span>
         </div>
      </div>
  </div>
-  <div id="ContToAuton">
+  <div id="ContToAuton" class="tobeclosed">
         <div id="StartAuton" class="topAuton hidden container center topel ">
             <div class="row">
               <h4>When Autonomous mode begins, please continue</h4>
               <a class="Next startauton waves-effect waves-light btn col s12 green">Continue to autonomous mode</a>
             </div>
         </div>
-        <div id="SelectTraps" class="hidden container center topel">
+        <div id="AutonMove" class="hidden container center topel">
         <div class="row">
           <h5>Does the robot move during Autonomous mode? </h5>
           <span title="AutonMove" class="option checkable Next col s12 btn">
@@ -126,8 +126,34 @@
            <span title="AutonNoMove" class="option checkable waitfortele col s12 btn">
             <h4>No</h4>
           </span>
+          </div>
         </div>
-     </div>
+        <div id="AutonQ" class="topel hidden center">
+          <div id="DefencesBreached" class="center">
+          <div class="row">
+            <span class="defbreached">
+              <h6>Defences Breached:</h6>
+              <span class="options">
+                <a title="def1reached" class="checkable largebtn goaway waves-effect waves-light btn blue col s12">Lowbar</a>
+                <a title="def2reached" class="checkable largebtn goaway waves-effect waves-light btn green col s12"></a>
+                <a title="def3reached" class="checkable largebtn goaway waves-effect waves-light btn red col s12"></a>
+                <a title="def4reached" class="checkable largebtn goaway waves-effect waves-light btn black col s12"></a>
+                <a title="def5reached" class="checkable largebtn goaway waves-effect waves-light btn pink col s12"></a>
+            </span>
+          </span>
+          </div>
+          </div>
+          <div id="Shots" class="center" style="top: 68% !important; position: absolute !important;">
+          <div class="row">
+              <h6>Shots:</h6>
+              <span class="options">
+                <a class="addautonhigh largebtn waves-effect waves-light btn green col s12">High goal</a>
+                <a class="addautonlow largebtn waves-effect waves-light btn blue col s12">Low goal</a>
+                <a class="addautonmissed largebtn waves-effect waves-light btn red col s12">Missed</a>
+              </span>
+          </div>
+          </div>
+        </div>
   </div>
   <div id="GenQR" class="hidden container center topel">
     <div class="row">
