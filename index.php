@@ -4,7 +4,7 @@
     if ($_SESSION['loggedin'] != 1) {
     }
     else {
-      header("Location: Protected/Interface.php");
+      header("Location: protected/Interface.php");
     }
 ?>
 <html>
@@ -39,7 +39,7 @@
     <div>
       <div class="container">
         <h3 class="center">Log in:</h3>
-        <form action="Protected/Auth.php?login=1" method="post">
+        <form action="protected/Auth.php?login=1" method="post">
           Username: <input type="text" name="username" />
           Password: <input type="password" name="password" />
           <input class="btn black" type="submit" />
