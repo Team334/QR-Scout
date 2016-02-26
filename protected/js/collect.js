@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
 	//Init loading slideUp
 	$.mobile.loading().slideUp();
@@ -29,7 +31,7 @@ $(document).ready(function() {
 	$(".addtelelow").click(addtelelow);
 	$(".addtelemissed").click(addtelemissed);
 	$(".Gen").click(generate);
-	$("#nameNo").click(logout)
+	$("#nameNo").click(function(){window.location.href = 'Logout.html';})
 	var checktraps = setInterval(function(){
 	if (defs[3]) {
 		clearInterval(checktraps);
@@ -79,7 +81,6 @@ $(document).ready(function() {
 	}
 	function contToEnd() {
 		answerobj['telebreached'] = telebreached;
-		console.log(answerobj);
 		$('.end').slideDown(400);
 	}
 
@@ -198,10 +199,4 @@ $(document).ready(function() {
 			defs.push(thistitle);
 			console.log(defs);
 	}
-	function logout() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-     window.location.href = "../index.html"
-    });
-  }
 });

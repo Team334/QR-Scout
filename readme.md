@@ -1,7 +1,4 @@
-# QR-Scout (at least for now)
-
-**Note:**
-This is not the full code. All files that are under the protected section of the site are hidden. For all code please contact me directly.
+# QR-Scout <sub>otherwise known as LARS</sub> (at least for now)
 
 ### Info:
 A QR based Scouting system for FRC. Made for mobile web.
@@ -15,7 +12,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 
 
 ### Outside Libraries Used:
-[WebCodeCam](https://github.com/andrastoth/WebCodeCam) for QR scanning.
+[WebCodeCam](https://github.com/andrastoth/WebCodeCam) for QR scanning. 
 
 ### Changelog:
 - Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1) **2/13/16**
@@ -23,6 +20,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 - Minor Css Changes || Started Work on collect data page Hrly. Update 1 **2/15/16**
 - Collect.js changes (functions added) || Continued Work on collect data page **2/15/16**
 - Collect.js changes (functions added) || Continued Work on collect data page **2/16/16**
+- Everything kinda changed. Been awhile since a commit major work on Collect pages and login moved to Google Sign in to get ready for open source release **2/25/16**
 
 ### To Do list:
 	-Create Decoder for QR codes

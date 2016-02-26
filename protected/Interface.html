@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Team 334 LARS
+  </title>
+</head>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="679754199338-7ulh4hifgejlecgeeg7gibnasncia9rt.apps.googleusercontent.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<body>
+  <div id="body">
+  <nav>
+  <div class="nav-wrapper black">
+    <a href="#!" class="brand-logo center">LARS</a>
+    <a href="#" data-activates="mobile" class="button-collapse"><i style="margin-left: 3px;" class="fa fa-bars"></i></a>
+    <ul class="hide-on-med-and-down">
+      <li class="left"><a href="Interface.html">Home</a></li>
+      <li class="left"><a href="Recieve.html">Recieve</a></li>
+      <li class="left"><a href="Collect.html">Collect</a></li>
+      <li class="right"><a onclick="logout()">Logout</a></li>
+    </ul>
+    <ul class="side-nav" id="mobile">
+      <li><a href="Interface.html">Home</a></li>
+      <li><a href="Recieve.html">Recieve</a></li>
+      <li><a href="Collect.html">Collects</a></li>
+      <li><a onclick="logout()">Logout</a></li>
+    </ul>
+    </div>
+  </nav>
+  <content>
+    <div id="Weclome" class="center">
+      <h1>
+        Welcome <span class="name"></span> to the Team 334 LARS system
+      </h1>
+    </div>
+    <div id="teamSelection" class="center container">
+        <div class='row option'>
+            <a href="Recieve.html">
+             <span class="option green recieve col s6 alignv">
+                 Recieve <h3><i class="fa fa-qrcode"></i></h3>
+             </span>
+            </a>
+            <a href="Collect.html">
+                <span class="option red collect col s6 alignv">
+                         Collect <h3><i class="fa fa-pencil"></i></h3>
+                </span>
+            </a>
+        </div>
+    </div>    
+  </content>
+  </div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+</body>
+<script>
+$('#body').hide();
+function onSignIn(googleUser) {
+    $('#body').show();
+    $('.g-signin2').hide();
+  var profile = googleUser.getBasicProfile();
+  $('.name').text(profile.getName());
+  console.log('ID: ' + profile.getId());
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
+function logout() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+       window.location.href = "../index.html";
+    });
+  }
+</script>
+</html>

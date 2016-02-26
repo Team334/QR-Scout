@@ -5,6 +5,8 @@
     Team 334 LARS
   </title>
 </head>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="679754199338-7ulh4hifgejlecgeeg7gibnasncia9rt.apps.googleusercontent.com">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -15,18 +17,19 @@
   <script src="../js/collect.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <body>
+  <div id="body">
   <nav>
   <div class="nav-wrapper black">
     <a href="#!" class="brand-logo center">LARS</a>
     <ul class="left hide-on-med-and-down">
-      <li><a href="Interface.php">Home</a></li>
-      <li><a href="Recieve.php">Recieve</a></li>
-      <li><a href="Collect.php">Collect</a></li>
+      <li><a href="Interface.html">Home</a></li>
+      <li><a href="Recieve.html">Recieve</a></li>
+      <li><a href="Collect.html">Collect</a></li>
     </ul>
     <ul class="side-nav" id="mobile">
-      <li><a href="Interface.php">Home</a></li>
-      <li><a href="Recieve.php">Recieve</a></li>
-      <li><a href="Collect.php">Collects</a></li>
+      <li><a href="Interface.html">Home</a></li>
+      <li><a href="Recieve.html">Recieve</a></li>
+      <li><a href="Collect.html">Collects</a></li>
     </ul>
     </div>
   </nav>
@@ -34,7 +37,7 @@
     <div id="pre-game">
       <div id="AskIsPerosn" class="container center topel">
         <h3>
-          Hello, is <?php echo $_SESSION['username']?> your name?
+          Hello, is <span class="name"></span> your name?
         </h3>
         <div class="row">
           <a class="Next waves-effect waves-light btn col s5 green" style="margin-right: 4px; margin-left: 5px;">Yes</a>
@@ -178,11 +181,26 @@
           </div>
         </div>
   </div>
-  <div id="GenQR" class="hidden container center topel">
+  <div id="GenQR" class="hidden container center topel end">
     <div class="row">
       <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
    </div>
   </div>
   </content>
+  </div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
+<script>
+$('#body').hide();
+function onSignIn(googleUser) {
+    $('#body').show();
+    $('.g-signin2').hide();
+  var profile = googleUser.getBasicProfile();
+  $('.name').text(profile.getName());
+  console.log('ID: ' + profile.getId());
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
+</script>
 </html>
