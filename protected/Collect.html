@@ -14,6 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/qrcode.min.js"></script>
   <script src="../js/collect.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <body>
@@ -23,12 +24,12 @@
     <a href="#!" class="brand-logo center">LARS</a>
     <ul class="left hide-on-med-and-down">
       <li><a href="Interface.html">Home</a></li>
-      <li><a href="Recieve.html">Recieve</a></li>
+      <li><a href="Receive.html">Receive</a></li>
       <li><a href="Collect.html">Collect</a></li>
     </ul>
     <ul class="side-nav" id="mobile">
       <li><a href="Interface.html">Home</a></li>
-      <li><a href="Recieve.html">Recieve</a></li>
+      <li><a href="Receive.html">Receive</a></li>
       <li><a href="Collect.html">Collects</a></li>
     </ul>
     </div>
@@ -121,11 +122,11 @@
             <span class="defbreached">
               <h6>Defences Breached:</h6>
               <span class="options">
-                <a title="def1reached" class="autonbreach largebtn goaway waves-effect waves-light btn blue col s12">Lowbar</a>
-                <a title="def2reached" class="autonbreach largebtn goaway waves-effect waves-light btn green col s12"></a>
-                <a title="def3reached" class="autonbreach largebtn goaway waves-effect waves-light btn red col s12"></a>
-                <a title="def4reached" class="autonbreach largebtn goaway waves-effect waves-light btn black col s12"></a>
-                <a title="def5reached" class="autonbreach largebtn goaway waves-effect waves-light btn pink col s12"></a>
+                <a title="a" class="autonbreach largebtn goaway waves-effect waves-light btn blue col s12">Lowbar</a>
+                <a title="b" class="autonbreach largebtn goaway waves-effect waves-light btn green col s12"></a>
+                <a title="c" class="autonbreach largebtn goaway waves-effect waves-light btn red col s12"></a>
+                <a title="d" class="autonbreach largebtn goaway waves-effect waves-light btn black col s12"></a>
+                <a title="e" class="autonbreach largebtn goaway waves-effect waves-light btn pink col s12"></a>
             </span>
           </span>
           </div>
@@ -155,7 +156,7 @@
           </div>
         </div>
         <div id="AutonQ" class="topel hidden center">
-          <div id="DefencesBreached" class="center">
+          <div id="DefencesBreachedTele" class="center">
           <div class="row">
             <span class="defbreachedtele">
               <h6>Defences Breached:</h6>
@@ -180,11 +181,38 @@
           </div>
           </div>
         </div>
+        <div id="endgameq" class="center hidden">
+          <div class="row">
+          <h5>Does the robot reach the base of the tower?</h5>
+          <span title="BaseReached" class="option endreached col s12 btn">
+            <h4>Yes</h4>
+          </span>
+           <span title="BaseNotReached" class="option endreached col s12 btn">
+            <h4>No</h4>
+          </span>
+          </div>
+          <div class="row">
+          <h5>Does the robot scale the tower?</h5>
+          <span title="BaseScaled" class="option endscale col s12 btn">
+            <h4>Yes</h4>
+          </span>
+           <span title="BaseScaled" class="option endscale col s12 btn">
+            <h4>No</h4>
+          </span>
+          </div>
+        </div>
   </div>
   <div id="GenQR" class="hidden container center topel end">
     <div class="row">
+      <div class="input-field col s12">
+          <textarea id="notes" class="materialize-textarea"></textarea>
+          <label for="notes">Write match notes here</label>
+        </div>
+    </div>
+    <div class="row">
       <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
    </div>
+   <div id="qrcode"></div>
   </div>
   </content>
   </div>

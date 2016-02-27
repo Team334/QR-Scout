@@ -21,6 +21,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 - Collect.js changes (functions added) || Continued Work on collect data page **2/15/16**
 - Collect.js changes (functions added) || Continued Work on collect data page **2/16/16**
 - Everything kinda changed. Been awhile since a commit || major work on Collect pages and login moved to Google Sign in to get ready for open source release **2/25/16**
+- Collect.html is done! || Work on compression of data for QR code generation **2/26/16**
 
 ### To Do list:
 	-Create Decoder for QR codes

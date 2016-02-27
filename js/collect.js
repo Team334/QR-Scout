@@ -5,29 +5,28 @@ $(document).ready(function() {
 	var answerobj = {};
 	var autonbreached = []
 	var defs = []
-	var telebreached = {}
+	var telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
 	var autonhigh = 0;
 	var autonlow = 0;
 	var autonmissed = 0;
 	var telehigh = 0;
 	var telelow = 0;
 	var telemissed = 0;
-	function generate() {
-		console.log(answerobj);
-	}
 	$(".Next").click(next);
 	$(".checkable").click(select);
 	$(".checkabledef").click(selectdef);
 	$(".autonbreach").click(addtoautonbreached);
 	$(".goaway").click(goaway);
 	$(".waitfortele").click(waitfortele);
-	$(".startauton").click({timernum: 15, ths: '#ContToAuton', tme: 0}, changetimer);
+	$(".startauton").click({timernum: 5, ths: '#ContToAuton', tme: 0}, changetimer);
 	$(".addautonhigh").click(addautonhigh);
 	$(".addautonlow").click(addautonlow);
 	$(".addautonmissed").click(addautonmissed);
 	$(".addtelehigh").click(addtelehigh);
 	$(".addtelelow").click(addtelelow);
 	$(".addtelemissed").click(addtelemissed);
+	$(".endscale").click(checkendscale);
+	$(".endreached").click(checkendreached);
 	$(".Gen").click(generate);
 	$("#nameNo").click(logout)
 	var checktraps = setInterval(function(){
@@ -36,7 +35,46 @@ $(document).ready(function() {
 		answerobj['defs'] = defs;
 		contToAuton();
 	}}, 100);
-
+	function generate() {
+		answerobj['fieldNotes'] = $('#notes').val();
+		var zero = answerobj.AutonMove;
+		var one = answerobj.EndReached;
+		var two = answerobj.EndScaled;
+		var three = answerobj.autonHighGoals;
+		var four = answerobj.autonLowGoals;
+		var five = answerobj.autonMissedGoals;
+		var six = findautondefs();
+		console.log(six);
+		new QRCode(document.getElementById("qrcode"), '0:1,1:1,2:1,3:8,4:2,5:1,6:a_b_c_d,7:DF,P,R,SP,8:asdf;klajsf;klajsaslk;fja;lskdfjakl;sdjf,9:12,10:12,11:12,13:12,14:R,15:334');
+		console.log(answerobj);
+	}
+	function findautondefs() {
+		var obj = answerobj.autondefsbreached;
+		if (obj[4]) {
+			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3]+"_"+obj[4];
+			return answer;
+		}
+		else if (obj[3]) {
+			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3];
+			return answer;
+		}
+		else if (obj[2]) {
+			var answer = obj[0]+"_"+obj[1]+"_"+obj[2];
+			return answer;
+		}
+		else if (obj[1]) {
+			var answer = obj[0]+"_"+obj[1];
+			return answer;
+		}
+		else if (obj[0]) {
+			var answer = obj[0];
+			return answer;
+		}
+		else{
+			var answer = 0;
+			return answer;
+		}
+	}
 	function next() {
 		$(this).closest('.topel').slideUp(400);
 		$(this).closest('.topel').next().show(200);
@@ -55,14 +93,14 @@ $(document).ready(function() {
 		//$('.defbreached > h5').find("[title='def2reached'").html(answerobj[]);
 		var arrnum = 0;
 		$('.defbreached > .options').children().each(function() {
-			if ($(this).attr('title') != 'def1reached') {
+			if ($(this).attr('title') != 'a') {
 				$(this).html(defs[arrnum]);
 				arrnum++;
 			}
 		})
 	}
 	function contToTele() {
-		changetimer({data: {timernum: 135, ths: '#ContToTele', time: 1}});
+		changetimer({data: {timernum: 5, ths: '#ContToTele', time: 1}});
 		answerobj['autondefsbreached'] = autonbreached;
 		answerobj['autonHighGoals'] = autonhigh;
 		answerobj['autonLowGoals'] = autonlow;
@@ -79,6 +117,9 @@ $(document).ready(function() {
 	}
 	function contToEnd() {
 		answerobj['telebreached'] = telebreached;
+		answerobj['teleHighGoals'] = telehigh;
+		answerobj['teleLowGoals'] = telelow;
+		answerobj['teleMissedGoals'] = telemissed;
 		console.log(answerobj);
 		$('.end').slideDown(400);
 	}
@@ -99,11 +140,19 @@ $(document).ready(function() {
 				$(ths).slideUp();
 				contToTele();
 			}
-			else if (timernum < 0 && time != 0) {
-				clearInterval(i);
-				$(ths).slideUp();
-				$(".brand-logo").html("LAR");
-				contToEnd();
+			else if (timernum < 16 && time != 0) {
+				$('#DefencesBreachedTele').slideUp(200);
+				$('#endgameq').slideDown(400);
+				if (timernum <= 5){
+				$('.nav-wrapper').addClass('flash');
+				}
+				if (timernum < 0 && time != 0) {
+					clearInterval(i);
+					$(ths).slideUp();
+					$(".brand-logo").html("LAR");
+					$('.nav-wrapper').removeClass('flash');
+					contToEnd();
+				}
 			}
 			else if (timernum <= 5){
 				$('.nav-wrapper').addClass('flash');
@@ -112,19 +161,16 @@ $(document).ready(function() {
 	}
 	//DefTimers
 	var count = 0;
-	var countms = 0;
 	var time = 0;
 
 	$('.telestbreach').on('vmousedown',function(){
 		var ths = $(this);
 		var def = $(this).text();
 	    deftimer = setInterval(function(){
-	    	countms++
-	    	if (countms == 10){
-	    		countms = 0;
-	    		count++;
+	    	time = time+.1;
+	    	if (decimalPlaces(time) != 1) {
+	    		time = Math.round( time * 10 ) / 10;
 	    	}
-	    	time = count+"."+countms;
 	        ths.text(def+" "+time);
 	    }, 100);
 
@@ -141,6 +187,17 @@ $(document).ready(function() {
 	    time = 0;
 	    return false;
 	});
+
+	function decimalPlaces(num) {
+	  var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+	  if (!match) { return 0; }
+	  return Math.max(
+       0,
+       // Number of digits right of decimal point.
+       (match[1] ? match[1].length : 0)
+       // Adjust for scientific notation.
+       - (match[2] ? +match[2] : 0));
+	}
 
 	//End DefTimers
 	function waitfortele () {
@@ -197,6 +254,28 @@ $(document).ready(function() {
 			var thistitle = $(this).attr('title');
 			defs.push(thistitle);
 			console.log(defs);
+	}
+	function checkendreached() {
+			var thistitle = $(this).attr('title');
+			if (thistitle == 'BaseReached') {
+				answerobj['EndReached'] = 1;
+			}
+			else {
+				answerobj['EndReached'] = 0;
+			}
+			$(this).parent().hide(200);
+			console.log(answerobj);
+	}
+	function checkendscale() {
+			var thistitle = $(this).attr('title');
+			if (thistitle == 'BaseScaled') {
+				answerobj['EndScaled'] = 1;
+			}
+			else {
+				answerobj['EndScaled'] = 0;
+			}
+			$(this).parent().hide(200);
+			console.log(answerobj);
 	}
 	function logout() {
     var auth2 = gapi.auth2.getAuthInstance();
