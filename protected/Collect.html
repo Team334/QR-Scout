@@ -16,6 +16,7 @@
   <script src="../js/main.js"></script>
   <script src="../js/qrcode.min.js"></script>
   <script src="../js/collect.js"></script>
+  <script src="../js/QREncoding.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <body>
   <div id="body">
@@ -196,7 +197,7 @@
           <span title="BaseScaled" class="option endscale col s12 btn">
             <h4>Yes</h4>
           </span>
-           <span title="BaseScaled" class="option endscale col s12 btn">
+           <span title="BaseNotScaled" class="option endscale col s12 btn">
             <h4>No</h4>
           </span>
           </div>
@@ -225,6 +226,7 @@ function onSignIn(googleUser) {
     $('.g-signin2').hide();
   var profile = googleUser.getBasicProfile();
   $('.name').text(profile.getName());
+  name = profile.getName();
   console.log('ID: ' + profile.getId());
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());

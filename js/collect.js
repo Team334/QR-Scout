@@ -1,8 +1,4 @@
-$(document).ready(function() {
-	//Init loading slideUp
-	$.mobile.loading().slideUp();
-	//Init array that holds values of multchoice
-	var answerobj = {};
+var answerobj = {};
 	var autonbreached = []
 	var defs = []
 	var telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
@@ -12,6 +8,11 @@ $(document).ready(function() {
 	var telehigh = 0;
 	var telelow = 0;
 	var telemissed = 0;
+	var name;
+$(document).ready(function() {
+	//Init loading slideUp
+	$.mobile.loading().slideUp();
+	//Init array that holds values of multchoice
 	$(".Next").click(next);
 	$(".checkable").click(select);
 	$(".checkabledef").click(selectdef);
@@ -27,54 +28,56 @@ $(document).ready(function() {
 	$(".addtelemissed").click(addtelemissed);
 	$(".endscale").click(checkendscale);
 	$(".endreached").click(checkendreached);
-	$(".Gen").click(generate);
 	$("#nameNo").click(logout)
+	$(".Gen").click(generate);
 	var checktraps = setInterval(function(){
 	if (defs[3]) {
 		clearInterval(checktraps);
 		answerobj['defs'] = defs;
 		contToAuton();
 	}}, 100);
-	function generate() {
-		answerobj['fieldNotes'] = $('#notes').val();
-		var zero = answerobj.AutonMove;
-		var one = answerobj.EndReached;
-		var two = answerobj.EndScaled;
-		var three = answerobj.autonHighGoals;
-		var four = answerobj.autonLowGoals;
-		var five = answerobj.autonMissedGoals;
-		var six = findautondefs();
-		console.log(six);
-		new QRCode(document.getElementById("qrcode"), '0:1,1:1,2:1,3:8,4:2,5:1,6:a_b_c_d,7:DF,P,R,SP,8:asdf;klajsf;klajsaslk;fja;lskdfjakl;sdjf,9:12,10:12,11:12,13:12,14:R,15:334');
-		console.log(answerobj);
+	//DefTimers
+	var count = 0;
+	var time = 0;
+
+	$('.telestbreach').on('vmousedown',function(){
+		var ths = $(this);
+		var def = $(this).text();
+	    deftimer = setInterval(function(){
+	    	time = time+.1;
+	    	if (decimalPlaces(time) != 1) {
+	    		time = Math.round( time * 10 ) / 10;
+	    	}
+	        ths.text(def+" "+time);
+	    }, 100);
+
+	    return false;
+	});
+
+	$('.telestbreach').on('vmouseup',function(){
+		var ths = $(this).attr('title');
+	    clearInterval(deftimer);
+	    telebreached[ths] = time;
+	    console.log(telebreached);
+	    count = 0;
+	    countms = 0;
+	    time = 0;
+	    return false;
+	});
+
+	function decimalPlaces(num) {
+	  var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+	  if (!match) { return 0; }
+	  return Math.max(
+       0,
+       // Number of digits right of decimal point.
+       (match[1] ? match[1].length : 0)
+       // Adjust for scientific notation.
+       - (match[2] ? +match[2] : 0));
 	}
-	function findautondefs() {
-		var obj = answerobj.autondefsbreached;
-		if (obj[4]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3]+"_"+obj[4];
-			return answer;
-		}
-		else if (obj[3]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3];
-			return answer;
-		}
-		else if (obj[2]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2];
-			return answer;
-		}
-		else if (obj[1]) {
-			var answer = obj[0]+"_"+obj[1];
-			return answer;
-		}
-		else if (obj[0]) {
-			var answer = obj[0];
-			return answer;
-		}
-		else{
-			var answer = 0;
-			return answer;
-		}
-	}
+
+	//End DefTimers
+	});
 	function next() {
 		$(this).closest('.topel').slideUp(400);
 		$(this).closest('.topel').next().show(200);
@@ -100,7 +103,7 @@ $(document).ready(function() {
 		})
 	}
 	function contToTele() {
-		changetimer({data: {timernum: 5, ths: '#ContToTele', time: 1}});
+		changetimer({data: {timernum: 30, ths: '#ContToTele', time: 1}});
 		answerobj['autondefsbreached'] = autonbreached;
 		answerobj['autonHighGoals'] = autonhigh;
 		answerobj['autonLowGoals'] = autonlow;
@@ -159,49 +162,8 @@ $(document).ready(function() {
 			}
 		},1000);
 	}
-	//DefTimers
-	var count = 0;
-	var time = 0;
-
-	$('.telestbreach').on('vmousedown',function(){
-		var ths = $(this);
-		var def = $(this).text();
-	    deftimer = setInterval(function(){
-	    	time = time+.1;
-	    	if (decimalPlaces(time) != 1) {
-	    		time = Math.round( time * 10 ) / 10;
-	    	}
-	        ths.text(def+" "+time);
-	    }, 100);
-
-	    return false;
-	});
-
-	$('.telestbreach').on('vmouseup',function(){
-		var ths = $(this).attr('title');
-	    clearInterval(deftimer);
-	    telebreached[ths] = time;
-	    console.log(telebreached);
-	    count = 0;
-	    countms = 0;
-	    time = 0;
-	    return false;
-	});
-
-	function decimalPlaces(num) {
-	  var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
-	  if (!match) { return 0; }
-	  return Math.max(
-       0,
-       // Number of digits right of decimal point.
-       (match[1] ? match[1].length : 0)
-       // Adjust for scientific notation.
-       - (match[2] ? +match[2] : 0));
-	}
-
-	//End DefTimers
 	function waitfortele () {
-		$("#ContToAuton").html('<h1 class="center">Please wait for this mode to end</h1>');
+		$("#ContToTele").html('<h1 class="center">Please wait for this mode to end</h1>');
 	}
 	function goaway() {
 		$(this).slideUp(100);
@@ -243,13 +205,6 @@ $(document).ready(function() {
 			autonbreached.push(thistitle);
 			console.log(autonbreached);
 	}
-	function starttelebreached() {
-			$(this).removeClass('telestbreach');
-			startdeftimer($(this));
-			// var thistitle = $(this).attr('title');
-			// autonbreached.push(thistitle);
-			// console.log(autonbreached);
-	}
 	function selectdef() {
 			var thistitle = $(this).attr('title');
 			defs.push(thistitle);
@@ -283,4 +238,3 @@ $(document).ready(function() {
      window.location.href = "../index.html"
     });
   }
-});
