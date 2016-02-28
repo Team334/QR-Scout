@@ -1,3 +1,8 @@
+//FOR QR CODE GENERATION
+function generatepit() {
+	answerobj['fieldNotes'] = $('#notes').val();
+	new QRCode(document.getElementById("qrcode"), String(answerobj.teamName)+','+String(answerobj.fieldNotes));
+}
 function generate() {
 		answerobj['fieldNotes'] = $('#notes').val();
 		var zero = String(answerobj.AutonMove);
@@ -89,3 +94,4 @@ function generate() {
 		if(answerobj.sideBlue == 1) string = 'B';
 		return string;
 	}
+// END QR CODE GENERATION

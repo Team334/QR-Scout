@@ -28,8 +28,10 @@ $(document).ready(function() {
 	$(".addtelemissed").click(addtelemissed);
 	$(".endscale").click(checkendscale);
 	$(".endreached").click(checkendreached);
+	$(".gotopit").click(pitscouting);
 	$("#nameNo").click(logout)
 	$(".Gen").click(generate);
+	$(".GenPit").click(generatepit);
 	var checktraps = setInterval(function(){
 	if (defs[3]) {
 		clearInterval(checktraps);
@@ -58,7 +60,6 @@ $(document).ready(function() {
 		var ths = $(this).attr('title');
 	    clearInterval(deftimer);
 	    telebreached[ths] = time;
-	    console.log(telebreached);
 	    count = 0;
 	    countms = 0;
 	    time = 0;
@@ -108,7 +109,6 @@ $(document).ready(function() {
 		answerobj['autonHighGoals'] = autonhigh;
 		answerobj['autonLowGoals'] = autonlow;
 		answerobj['autonMissedGoals'] = autonmissed;
-		console.log(answerobj);
 		$('.topTele').show(200);
 		var arrnum = 0;
 		$('.defbreachedtele > .options').children().each(function() {
@@ -123,7 +123,6 @@ $(document).ready(function() {
 		answerobj['teleHighGoals'] = telehigh;
 		answerobj['teleLowGoals'] = telelow;
 		answerobj['teleMissedGoals'] = telemissed;
-		console.log(answerobj);
 		$('.end').slideDown(400);
 	}
 
@@ -198,17 +197,14 @@ $(document).ready(function() {
 			if (thistitle == 'sideRed' || thistitle == 'sideBlue') {
 				$('#teamside').slideUp(200);
 			}
-			console.log(answerobj);
 	}
 	function addtoautonbreached() {
 			var thistitle = $(this).attr('title');
 			autonbreached.push(thistitle);
-			console.log(autonbreached);
 	}
 	function selectdef() {
 			var thistitle = $(this).attr('title');
 			defs.push(thistitle);
-			console.log(defs);
 	}
 	function checkendreached() {
 			var thistitle = $(this).attr('title');
@@ -219,7 +215,6 @@ $(document).ready(function() {
 				answerobj['EndReached'] = 0;
 			}
 			$(this).parent().hide(200);
-			console.log(answerobj);
 	}
 	function checkendscale() {
 			var thistitle = $(this).attr('title');
@@ -230,7 +225,14 @@ $(document).ready(function() {
 				answerobj['EndScaled'] = 0;
 			}
 			$(this).parent().hide(200);
-			console.log(answerobj);
+	}
+	function pitscouting() {
+		answerobj['teamName'] = $('#pre-game').children().find(".teamNum").val();
+		$('#pre-game').hide(200);
+		$('#GenQR').show(200);
+		$('.Gen').hide(200);
+		$('.GenPit').show(200);
+
 	}
 	function logout() {
     var auth2 = gapi.auth2.getAuthInstance();

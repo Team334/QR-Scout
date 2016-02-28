@@ -49,7 +49,7 @@
       <div id="SelectRobot" class="hidden container center topel">
         <div class="row">
           <h5>Team Number:</h5>
-          <input type="number" class="Writenval" title="teamNum" class="s6">
+          <input type="number" class="Writenval teamNum" title="teamNum" class="s6">
         </div>
         <div class="row">
           <h5>Match Number:</h5>
@@ -62,6 +62,12 @@
           </span>
           <span title="sideBlue" class="checkable option blue col s6 waves-effect waves-light btn">
             <h4>Blue</h4>
+          </span>
+        </div>
+        <div class="row" id="teamside">
+          <h5>Pit Scouting? (Optional)</h5>
+          <span title="sideRed" class="gotopit option green col s12 waves-effect waves-light btn">
+            <h4>Yes</h4>
           </span>
         </div>
         <a class="Next waves-effect waves-light btn col s12 green">Next</a>
@@ -212,6 +218,7 @@
     </div>
     <div class="row">
       <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
+      <a class="GenPit waves-effect waves-light btn col s12 green hidden">Generate QR code</a>
    </div>
    <div id="qrcode"></div>
   </div>
