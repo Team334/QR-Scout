@@ -9,7 +9,11 @@ var answerobj = {};
 	var telelow = 0;
 	var telemissed = 0;
 	var name;
-$(document).ready(function() {
+	var checktraps;
+	var inithtml;
+	var qrcode = new QRCode("qrcode");
+$(document).ready(ready);
+	function ready() {
 	//Init loading slideUp
 	$.mobile.loading().slideUp();
 	//Init array that holds values of multchoice
@@ -32,7 +36,8 @@ $(document).ready(function() {
 	$("#nameNo").click(logout)
 	$(".Gen").click(generate);
 	$(".GenPit").click(generatepit);
-	var checktraps = setInterval(function(){
+	$(".reset").click(reset);
+	checktraps = setInterval(function(){
 	if (defs[3]) {
 		clearInterval(checktraps);
 		answerobj['defs'] = defs;
@@ -78,7 +83,8 @@ $(document).ready(function() {
 	}
 
 	//End DefTimers
-	});
+	}
+
 	function next() {
 		$(this).closest('.topel').slideUp(400);
 		$(this).closest('.topel').next().show(200);
@@ -104,7 +110,7 @@ $(document).ready(function() {
 		})
 	}
 	function contToTele() {
-		changetimer({data: {timernum: 30, ths: '#ContToTele', time: 1}});
+		changetimer({data: {timernum: 10, ths: '#ContToTele', time: 1}});
 		answerobj['autondefsbreached'] = autonbreached;
 		answerobj['autonHighGoals'] = autonhigh;
 		answerobj['autonLowGoals'] = autonlow;
@@ -239,4 +245,20 @@ $(document).ready(function() {
     auth2.signOut().then(function () {
      window.location.href = "../index.html"
     });
-  }
+  	}
+  	function reset() {
+  		answerobj = {};
+		autonbreached = []
+		defs = []
+		telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
+		autonhigh = 0;
+		autonlow = 0;
+		autonmissed = 0;
+		telehigh = 0;
+		telelow = 0;
+		telemissed = 0;
+		name;
+		$('#body').html(inithtml);
+		qrcode = QRCode("qrcode");
+		ready();
+  	}

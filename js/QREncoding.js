@@ -1,7 +1,8 @@
 //FOR QR CODE GENERATION
 function generatepit() {
 	answerobj['fieldNotes'] = $('#notes').val();
-	new QRCode(document.getElementById("qrcode"), String(answerobj.teamName)+','+String(answerobj.fieldNotes));
+	qrcode.clear();
+	qrcode.makeCode(String(answerobj.teamName)+','+String(answerobj.fieldNotes));
 }
 function generate() {
 		answerobj['fieldNotes'] = $('#notes').val();
@@ -22,7 +23,8 @@ function generate() {
 		var fourteen = checkside();
 		var fifteen = String(answerobj.teamNum);
 		var fin = String(zero+','+one+','+two+','+three+','+four+','+five+','+six+','+seven+','+eight+','+nine+','+ten+','+eleven+','+twelve+','+thirteen+','+fourteen+','+fifteen+','+name);
-		new QRCode(document.getElementById("qrcode"), fin);
+		qrcode.clear();
+		qrcode.makeCode(fin);
 		console.log(answerobj);
 }
 	function findautondefs() {

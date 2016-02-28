@@ -17,10 +17,11 @@ A QR based Scouting system for FRC. Made for mobile web.
 
 ### Changelog:
 - Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1) **2/13/16**
-- Added items from [protected] (https://github.com/Team334/QR-Scout/tree/master/protected) folder that are nonsensitive **2/13/16** 
+- Added items from [protected] (https://github.com/Team334/QR-Scout/tree/master/protected) **2/13/16** 
 - Minor Css Changes || Started Work on collect data page || Collect.js changes (functions added) || Continued Work on collect data page **2/15/16**
 - Everything kinda changed. Been awhile since a commit || major work on Collect pages and login moved to Google Sign in to get ready for open source release **2/25/16**
-- Collect.html is done! || Work on compression of data for QR code generation || Update: Data encoding and QR generation done || Added pit scouting option **2/27/16**
+- Collect.html is done! <sub>edit: no it wasn't</sub> || Work on compression of data for QR code generation || Update: Data encoding and QR generation done || Added pit scouting option **2/27/16**
+- Collection Pages officially done (for now) || reset function added to collection || all collection bugs fixed **2/28/16**
 
 ### To Do list:
 	-Create Decoder for QR codes

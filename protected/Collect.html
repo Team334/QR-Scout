@@ -13,10 +13,6 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../js/qrcode.min.js"></script>
-  <script src="../js/collect.js"></script>
-  <script src="../js/QREncoding.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <body>
   <div id="body">
@@ -35,11 +31,11 @@
     </ul>
     </div>
   </nav>
-  <content>
+  <content id="content">
     <div id="pre-game">
       <div id="AskIsPerosn" class="container center topel">
         <h3>
-          Hello, is <span class="name"></span> your name?
+          <span class="name">Ready to input data?</span>
         </h3>
         <div class="row">
           <a class="Next waves-effect waves-light btn col s5 green" style="margin-right: 4px; margin-left: 5px;">Yes</a>
@@ -219,6 +215,7 @@
     <div class="row">
       <a class="Gen waves-effect waves-light btn col s12 green">Generate QR code</a>
       <a class="GenPit waves-effect waves-light btn col s12 green hidden">Generate QR code</a>
+      <a class="reset waves-effect waves-light btn col s12 green">Reset data collection</a>
    </div>
    <div id="qrcode"></div>
   </div>
@@ -227,12 +224,13 @@
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
 <script>
+inithtml = $('#body').html();
 $('#body').hide();
 function onSignIn(googleUser) {
     $('#body').show();
     $('.g-signin2').hide();
   var profile = googleUser.getBasicProfile();
-  $('.name').text(profile.getName());
+  $('.name').text('Hello, is your name '+profile.getName()+'?');
   name = profile.getName();
   console.log('ID: ' + profile.getId());
   console.log('Name: ' + profile.getName());
@@ -240,4 +238,8 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail());
 }
 </script>
+<script src="../js/main.js"></script>
+  <script src="../js/qrcode.min.js"></script>
+  <script src="../js/collect.js"></script>
+  <script src="../js/QREncoding.js"></script>
 </html>
