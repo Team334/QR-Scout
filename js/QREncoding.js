@@ -26,74 +26,81 @@ function generate() {
 		qrcode.clear();
 		qrcode.makeCode(fin);
 		console.log(answerobj);
+		console.log(fin);
 }
-	function findautondefs() {
-		var obj = answerobj.autondefsbreached;
-		if (obj[4]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3]+"_"+obj[4];
-			return answer;
+function findautondefs() {
+	var obj = answerobj.autondefsbreached;
+	if (obj[4]) {
+		var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3]+"_"+obj[4];
+		return answer;
+	}
+	else if (obj[3]) {
+		var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3];
+		return answer;
+	}
+	else if (obj[2]) {
+		var answer = obj[0]+"_"+obj[1]+"_"+obj[2];
+		return answer;
+	}
+	else if (obj[1]) {
+		var answer = obj[0]+"_"+obj[1];
+		return answer;
+	}
+	else if (obj[0]) {
+		var answer = obj[0];
+		return answer;
+	}
+	else{
+		var answer = 0;
+		return answer;
+	}
+}
+function finddefs() {
+	var string = "L";
+	var obj = answerobj.defs;
+	$.each( obj, function(key, value) {
+		 if(value == 'Portcullis') string = string+'_P';
+		 if(value == 'ChevalDF') string = string+'_C';
+		 if(value == 'Moat') string = string+'_M';
+		 if(value == 'Ramparts') string = string+'_R';
+		 if(value == 'Drawbridge') string = string+'_D';
+		 if(value == 'SallyPort') string = string+'_S';
+		 if(value == 'RockWall') string = string+'_RW';
+		 if(value == 'RoughTerrain') string = string+'_RT';
+	});
+	return string;
+}
+function findtelebreached() {
+	var string;
+	var def = 0;
+	var obj = answerobj.telebreached;
+	$.each( obj, function(key, value){
+		if(def == 4){
+			if(value == '') string = string + ' ';
+			else string = string + value;	
 		}
-		else if (obj[3]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2]+"_"+obj[3];
-			return answer;
-		}
-		else if (obj[2]) {
-			var answer = obj[0]+"_"+obj[1]+"_"+obj[2];
-			return answer;
-		}
-		else if (obj[1]) {
-			var answer = obj[0]+"_"+obj[1];
-			return answer;
-		}
-		else if (obj[0]) {
-			var answer = obj[0];
-			return answer;
+		else if(def == 0){
+			if(value == '') string = ' _';
+			else string = value +'_';	
 		}
 		else{
-			var answer = 0;
-			return answer;
+			if(value == '') string = string + " _";
+			else string = string + value +'_';	
 		}
-	}
-	function finddefs() {
-		var string = "L";
-		var obj = answerobj.defs;
-		$.each( obj, function(key, value) {
-			 if(value == 'Portcullis') string = string+'_P';
-			 if(value == 'ChevalDF') string = string+'_C';
-			 if(value == 'Moat') string = string+'_M';
-			 if(value == 'Ramparts') string = string+'_R';
-			 if(value == 'Drawbridge') string = string+'_D';
-			 if(value == 'SallyPort') string = string+'_S';
-			 if(value == 'RockWall') string = string+'_RW';
-			 if(value == 'RoughTerrain') string = string+'_RT';
-		});
-		return string;
-	}
-	function findtelebreached() {
-		var string;
-		var def = 0;
-		var obj = answerobj.telebreached;
-		$.each( obj, function(key, value){
-			if(def == 4){
-				if(value == '') string = string + ' ';
-				else string = string + value;	
-			}
-			else if(def == 0){
-				if(value == '') string = ' _';
-				else string = value +'_';	
-			}
-			else{
-				if(value == '') string = string + " _";
-				else string = string + value +'_';	
-			}
-			def++;
-		});
-		return string;
-	}
-	function checkside() {
-		var string;
-		if(answerobj.sideRed == 1) string = 'R';
-		if(answerobj.sideBlue == 1) string = 'B';
-		return string;
-	}
+		def++;
+	});
+	return string;
+}
+function checkside() {
+	var string;
+	if(answerobj.sideRed == 1) string = 'R';
+	if(answerobj.sideBlue == 1) string = 'B';
+	return string;
+}
 // END QR CODE GENERATION
+// QR CODE DATA INTO JSON OBJECT
+function QrToJson(incomming) {
+	alert(incomming);
+
+}
+// END QR DATA TO JSON

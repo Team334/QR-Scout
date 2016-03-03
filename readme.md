@@ -2,7 +2,7 @@
 
 ### Info:
 A QR based Scouting system for FRC. Made for mobile web.
-
+**[There is a wiki now. It's still being written but it's pretty complete](https://github.com/Team334/QR-Scout/wiki)**
 ### Requirements
 	Scanning codes: 
 		A. Must be on Firefox for android

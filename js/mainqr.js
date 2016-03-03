@@ -36,7 +36,8 @@
 				autoBrightnessValue: 120,
 				resultFunction: function(text, imgSrc) {
 					si.attr('src', imgSrc);
-					sQ.text(text);
+					sQ.text('Raw Data: '+text);
+					QrToJson(text);
 					sl.fadeOut(150, function() {
 						sl.fadeIn(150);
 					});

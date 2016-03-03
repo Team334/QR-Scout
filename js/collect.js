@@ -23,7 +23,7 @@ $(document).ready(ready);
 	$(".autonbreach").click(addtoautonbreached);
 	$(".goaway").click(goaway);
 	$(".waitfortele").click(waitfortele);
-	$(".startauton").click({timernum: 5, ths: '#ContToAuton', tme: 0}, changetimer);
+	$(".startauton").click({timernum: 30, ths: '#ContToAuton', tme: 0}, changetimer);
 	$(".addautonhigh").click(addautonhigh);
 	$(".addautonlow").click(addautonlow);
 	$(".addautonmissed").click(addautonmissed);
@@ -110,7 +110,7 @@ $(document).ready(ready);
 		})
 	}
 	function contToTele() {
-		changetimer({data: {timernum: 10, ths: '#ContToTele', time: 1}});
+		changetimer({data: {timernum: 60, ths: '#ContToTele', time: 1}});
 		answerobj['autondefsbreached'] = autonbreached;
 		answerobj['autonHighGoals'] = autonhigh;
 		answerobj['autonLowGoals'] = autonlow;
