@@ -86,47 +86,49 @@ function findautondefs() {
 	var sally = 0;
 	var rough = 0;
 	var low = 0;
-	$.each( obj, function(key, value) {
-		if(value == 'a') low = 1;
-		if(value == 'b'){
-			if(defs[0] == 'Portcullis') port = 1; 
-			if(defs[0] == 'ChevalDF') cheval = 1;
-			if(defs[0] == 'Moat') moat = 1; 
-			if(defs[0] == 'Ramparts') ramp = 1; 
-			if(defs[0] == 'Drawbridge') draw = 1; 
-			if(defs[0] == 'SallyPort') sally = 1;
-			if(defs[0] == 'RockWall') rock = 1; 
-			if(defs[0] == 'RoughTerrain') rough = 1; 
+	$.each(obj, function(key, value){
+		if(key == 'def2reached'){
+			if(defs[0] == 'Portcullis') port = value; 
+			if(defs[0] == 'ChevalDF') cheval = value;
+			if(defs[0] == 'Moat') moat = value; 
+			if(defs[0] == 'Ramparts') ramp = value; 
+			if(defs[0] == 'Drawbridge') draw = value; 
+			if(defs[0] == 'SallyPort') sally = value;
+			if(defs[0] == 'RockWall') rock = value; 
+			if(defs[0] == 'RoughTerrain') rough = value; 
 		}
-		if(value == 'c'){
-			if(defs[1] == 'Portcullis') port = 1; 
-			if(defs[1] == 'ChevalDF') cheval = 1;
-			if(defs[1] == 'Moat') moat = 1; 
-			if(defs[1] == 'Ramparts') ramp = 1; 
-			if(defs[1] == 'Drawbridge') draw = 1; 
-			if(defs[1] == 'SallyPort') sally = 1;
-			if(defs[1] == 'RockWall') rock = 1; 
-			if(defs[1] == 'RoughTerrain') rough = 1; 
+		if(key == 'def3reached'){
+			if(defs[1] == 'Portcullis') port = value; 
+			if(defs[1] == 'ChevalDF') cheval = value;
+			if(defs[1] == 'Moat') moat = value; 
+			if(defs[1] == 'Ramparts') ramp = value; 
+			if(defs[1] == 'Drawbridge') draw = value; 
+			if(defs[1] == 'SallyPort') sally = value;
+			if(defs[1] == 'RockWall') rock = value; 
+			if(defs[1] == 'RoughTerrain') rough = value; 
 		}
-		if(value == 'd'){
-			if(defs[2] == 'Portcullis') port = 1; 
-			if(defs[2] == 'ChevalDF') cheval = 1;
-			if(defs[2] == 'Moat') moat = 1; 
-			if(defs[2] == 'Ramparts') ramp = 1; 
-			if(defs[2] == 'Drawbridge') draw = 1; 
-			if(defs[2] == 'SallyPort') sally = 1;
-			if(defs[2] == 'RockWall') rock = 1; 
-			if(defs[2] == 'RoughTerrain') rough = 1; 
+		if(key == 'def4reached'){
+			if(defs[2] == 'Portcullis') port = value; 
+			if(defs[2] == 'ChevalDF') cheval = value;
+			if(defs[2] == 'Moat') moat = value; 
+			if(defs[2] == 'Ramparts') ramp = value; 
+			if(defs[2] == 'Drawbridge') draw = value; 
+			if(defs[2] == 'SallyPort') sally = value;
+			if(defs[2] == 'RockWall') rock = value; 
+			if(defs[2] == 'RoughTerrain') rough = value; 
 		}
-		if(value == 'e'){
-			if(defs[3] == 'Portcullis') port = 1; 
-			if(defs[3] == 'ChevalDF') cheval = 1;
-			if(defs[3] == 'Moat') moat = 1; 
-			if(defs[3] == 'Ramparts') ramp = 1; 
-			if(defs[3] == 'Drawbridge') draw = 1; 
-			if(defs[3] == 'SallyPort') sally = 1;
-			if(defs[3] == 'RockWall') rock = 1; 
-			if(defs[3] == 'RoughTerrain') rough = 1; 
+		if(key == 'def5reached'){
+			if(defs[3] == 'Portcullis') port = value; 
+			if(defs[3] == 'ChevalDF') cheval = value;
+			if(defs[3] == 'Moat') moat = value; 
+			if(defs[3] == 'Ramparts') ramp = value; 
+			if(defs[3] == 'Drawbridge') draw = value; 
+			if(defs[3] == 'SallyPort') sally = value;
+			if(defs[3] == 'RockWall') rock = value; 
+			if(defs[3] == 'RoughTerrain') rough = value; 
+		}
+		if(key == 'def1reached'){
+			low = value; 
 		}
 
 	});

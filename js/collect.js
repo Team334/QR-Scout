@@ -1,7 +1,7 @@
 var answerobj = {};
-	var autonbreached = []
-	var defs = []
-	var telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
+	var autondefsbreached = {'def1reached': '0' ,'def2reached': '0' ,'def3reached': '0' ,'def4reached': '0' ,'def5reached': '0'};
+	var defs = [];
+	var telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
 	var autonhigh = -1;
 	var autonlow = -1;
 	var autonmissedh = -1;
@@ -16,6 +16,11 @@ var answerobj = {};
 	var teledef3 = -1;
 	var teledef4 = -1;
 	var teledef5 = -1;
+	var autondef1 = 0;
+	var autondef2 = 0;
+	var autondef3 = 0;
+	var autondef4 = 0;
+	var autondef5 = 0;
 	var name;
 	var checktraps;
 	var inithtml;
@@ -125,7 +130,7 @@ $(document).ready(ready);
 	function gotoTele() {
 		var arrnum = 0;
 		$('.defbreached > .options').children().each(function() {
-			if ($(this).attr('title') != 'a') {
+			if ($(this).attr('title') != 'def1reached') {
 				$(this).html(defs[arrnum]);
 				arrnum++;
 			}
@@ -459,8 +464,16 @@ $(document).ready(ready);
 	}
 	function addtoautonbreached() {
 			var thistitle = $(this).attr('title');
-
-			autonbreached.push(thistitle);
+			if(thistitle == 'def1reached' && autondef1 == 1){ autondef1 = 0; $(this).removeClass('chosen');}
+			else if(thistitle == 'def1reached' && autondef1 == 0){autondef1 = 1; $(this).addClass('chosen');}
+			if(thistitle == 'def2reached' && autondef2 == 1){ autondef2 = 0; $(this).removeClass('chosen');}
+			else if(thistitle == 'def2reached' && autondef2 == 0){ autondef2 = 1; $(this).addClass('chosen');}
+			if(thistitle == 'def3reached' && autondef3 == 1){ autondef3 = 0; $(this).removeClass('chosen');}
+			else if(thistitle == 'def3reached' && autondef3 == 0){ autondef3 = 1; $(this).addClass('chosen');}
+			if(thistitle == 'def4reached' && autondef4 == 1){ autondef4 = 0; $(this).removeClass('chosen');}
+			else if(thistitle == 'def4reached' && autondef4 == 0){ autondef4 = 1; $(this).addClass('chosen');}
+			if(thistitle == 'def5reached' && autondef5 == 1){ autondef5 = 0; $(this).removeClass('chosen');}
+			else if(thistitle == 'def5reached' && autondef5 == 0){ autondef5 = 1; $(this).addClass('chosen');}
 	}
 	function selectdef() {
 			if ($(this).hasClass('chosendef')) {
@@ -736,9 +749,9 @@ $(document).ready(ready);
   	}
   	function reset() {
   		answerobj = {};
-		autonbreached = []
+		telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
 		defs = []
-		telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
+		autondefsbreached = {'def1reached': '0' ,'def2reached': '0' ,'def3reached': '0' ,'def4reached': '0' ,'def5reached': '0'}
 		autonhigh = -1;
 		autonlow = -1;
 		autonmissedh = -1;
