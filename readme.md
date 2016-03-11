@@ -2,18 +2,12 @@
 
 ### Info:
 A QR based Scouting system for FRC. Made for mobile web.
-**[There is a wiki now. It's still being written but it's pretty complete](https://github.com/Team334/QR-Scout/wiki)**
+**[There is a wiki now. It's still being written but it's has something](https://github.com/Team334/QR-Scout/wiki)**
 ### Requirements
-	Scanning codes: 
-		A. Must be on Firefox for android
-			or
-		B. Have SSL cert. on domain (and then can be used on any browser)
-
-
-
+	A phone with access to the internet, once (for about 10 seconds).
 ### Outside Libraries Used:
 [WebCodeCam](https://github.com/andrastoth/WebCodeCam) for QR scanning. 
-[qrcodejs](https://github.com/davidshimjs/qrcodejs) for QR code creation. 
+[jquery-qrcode](https://github.com/lrsjng/jquery-qrcode) for QR code creation. 
 
 ### Changelog:
 - Changed Folder names to fix [issue] (https://github.com/Team334/QR-Scout/issues/1) **2/13/16**
@@ -22,10 +16,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 - Everything kinda changed. Been awhile since a commit || major work on Collect pages and login moved to Google Sign in to get ready for open source release **2/25/16**
 - Collect.html is done! <sub>edit: no it wasn't</sub> || Work on compression of data for QR code generation || Update: Data encoding and QR generation done || Added pit scouting option **2/27/16**
 - Collection Pages officially done (for now) || reset function added to collection || all collection bugs fixed **2/28/16**
+- Been awhile since the git was updated. || as per request of the project manager there has been a total overhaul happening **3/10/16**
 
-### To Do list:
-	-Create Decoder for QR codes
-		-If the same code is scanned twice then do not display data 
-	-Write js code for collect page
 
 **Special thanks to [Kevin](https://github.com/furryfaust)**

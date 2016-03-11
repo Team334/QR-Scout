@@ -6,6 +6,7 @@
   </title>
 </head>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
   <meta name="google-signin-client_id" content="679754199338-7ulh4hifgejlecgeeg7gibnasncia9rt.apps.googleusercontent.com">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -18,21 +19,12 @@
   <div id="body">
   <nav>
   <div class="nav-wrapper black">
+    <span class="back"><i class="back fa fa-arrow-left left" style="font-size: 2em;"></i></span>
     <a href="#!" class="brand-logo center">LARS</a>
-    <ul class="left hide-on-med-and-down">
-      <li><a href="Interface.html">Home</a></li>
-      <li><a href="Receive.html">Receive</a></li>
-      <li><a href="Collect.html">Collect</a></li>
-    </ul>
-    <ul class="side-nav" id="mobile">
-      <li><a href="Interface.html">Home</a></li>
-      <li><a href="Receive.html">Receive</a></li>
-      <li><a href="Collect.html">Collects</a></li>
-    </ul>
-    </div>
+  </div>
   </nav>
   <content id="content">
-    <div id="pre-game">
+  <div id="pre-game">
       <div id="AskIsPerosn" class="container center topel">
         <h3>
           <span class="name">Ready to input data?</span>
@@ -42,7 +34,7 @@
           <a id="nameNo"class="waves-effect waves-light btn col s5 green">No</a>
         </div>
       </div>
-      <div id="SelectRobot" class="hidden container center topel">
+      <div id="SelectRobot" class="hidden newscreen container center topel active">
         <div class="row">
           <h5>Team Number:</h5>
           <input type="number" class="Writenval teamNum" title="teamNum" class="s6">
@@ -53,11 +45,16 @@
         </div>
         <div class="row" id="teamside">
           <h5>Team Color:</h5>
-          <span title="sideRed" class="checkable option red col s6 waves-effect waves-light btn">
+          <span title="sideRed" id="sideRed" data="Red" class="checkable option red col s6 waves-effect waves-light btn">
             <h4>Red</h4>
           </span>
-          <span title="sideBlue" class="checkable option blue col s6 waves-effect waves-light btn">
+          <span title="sideBlue" id="sideBlue" data="Blue" class="checkable option blue col s6 waves-effect waves-light btn">
             <h4>Blue</h4>
+          </span>
+        </div>
+        <div class="row">
+          <span title="HPY" class="checkHPY option black col s12 waves-effect waves-light btn">
+            <h4>Human Player?</h4>
           </span>
         </div>
         <div class="row" id="teamside">
@@ -68,40 +65,40 @@
         </div>
         <a class="Next waves-effect waves-light btn col s12 green">Next</a>
       </div>
-     <div id="SelectTraps" class="hidden container center topel">
+     <div id="SelectTraps" class="hidden newscreen container center topel">
         <div class="row">
           <h5>Select the Traps: (select four)</h5>
-          <span title="LowBar" class="option selected disabled col s12 btn">
+          <span title="LowBar" data="Low Bar" class="option selected chosen col s12 btn">
             <h4>Low Bar &#10003</h4>
           </span>
-          <span title="Portcullis" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="Portcullis" data="Portcullis" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Portcullis</h4>
           </span>
-          <span title="ChevalDF" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="ChevalDF" data="Cheval de Frise" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Cheval de Frise</h4>
           </span>
-          <span title="Moat" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="Moat" data="Moat" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Moat</h4>
           </span>
-          <span title="Ramparts" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="Ramparts" data="Ramparts" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Ramparts</h4>
           </span>
-          <span title="Drawbridge" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="Drawbridge" data="Drawbridge" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Drawbridge</h4>
           </span>
-          <span title="SallyPort" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="SallyPort" data="Sally Port" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Sally Port</h4>
           </span>
-          <span title="RockWall" class="option checkabledef goaway blue col s12 waves-effect waves-light btn">
+          <span title="RockWall" data="Rock Wall" class="option checkabledef blue col s12 waves-effect waves-light btn">
             <h4>Rock Wall</h4>
           </span>
-          <span title="RoughTerrain" class="option checkabledef goaway blue col s12 waves-effect waves-light btn lastpregame">
+          <span title="RoughTerrain" data="Rough Terrain" class="option checkabledef blue col s12 waves-effect waves-light btn lastpregame">
             <h4>Rough Terrain</h4>
           </span>
         </div>
      </div>
- </div>
-  <div id="ContToAuton" class="tobeclosed">
+  </div>
+  <div id="ContToAuton" class="tobeclosed newscreen">
         <div id="StartAuton" class="topAuton hidden container center topel ">
             <div class="row">
               <h4>When Autonomous mode begins, please continue</h4>
@@ -138,22 +135,22 @@
           <div class="row">
               <h6>Shots:</h6>
               <span class="options">
-                <a class="addautonhigh largebtn waves-effect waves-light btn green col s12">High goal</a>
-                <a class="addautonlow largebtn waves-effect waves-light btn blue col s12">Low goal</a>
-                <a class="addautonmissed largebtn waves-effect waves-light btn red col s12">Missed</a>
+                <a class="minusautonhigh largebtn waves-effect waves-light btn black col s2">-</a><a class="addautonhigh largebtn waves-effect waves-light btn green col s10">No High goals</a>
+                <a class="minusautonlow largebtn waves-effect waves-light btn grey col s2">-</a><a class="addautonlow largebtn waves-effect waves-light btn blue col s10">No Low goals</a>
+               <a title="high" class="minusautonmissed largebtn waves-effect waves-light btn black col s2">-</a><a title="high" class="addautonmissed largebtn waves-effect waves-light btn red col s4">No MissedH goals</a><a title="low" class="minusautonmissed largebtn waves-effect waves-light btn black col s2">-</a><a title="low" class="addautonmissed largebtn waves-effect waves-light btn red col s4">No MissedL goals</a>
               </span>
           </div>
           </div>
         </div>
   </div>
-  <div id="ContToTele" class="tobeclosed">
+  <div id="ContToTele" class="tobeclosed newscreen">
         <div id="TeleMove" class="topTele hidden container center topel">
         <div class="row">
           <h5>Does the robot move during Teleoperated mode? </h5>
-          <span title="AutonMove" class="option checkable Next col s12 btn">
+          <span title="TeleMove" class="option checkable Next col s12 btn">
             <h4>Yes</h4>
           </span>
-           <span title="AutonNoMove" class="option checkable waitfortele col s12 btn">
+           <span title="TeleNoMove" class="option checkable waitfortele col s12 btn">
             <h4>No</h4>
           </span>
           </div>
@@ -164,11 +161,11 @@
             <span class="defbreachedtele">
               <h6>Defences Breached:</h6>
               <span class="options">
-                <a title="def1reached" class="telestbreach largebtn btn blue col s12">Lowbar</a>
-                <a title="def2reached" class="telestbreach largebtn btn green col s12"></a>
-                <a title="def3reached" class="telestbreach largebtn btn red col s12"></a>
-                <a title="def4reached" class="telestbreach largebtn btn black col s12"></a>
-                <a title="def5reached" class="telestbreach largebtn btn pink col s12"></a>
+                <a class="minusscale largebtn btn black col s2">-</a><a title="def1reached" class="telestbreach largebtn btn blue col s8">Lowbar</a><a class="plusscale largebtn btn black col s2">+</a>
+                 <a class="minusscale largebtn btn grey col s2">-</a><a title="def2reached" class="telestbreach largebtn btn green col s8"></a><a class="plusscale largebtn btn grey col s2">+</a>
+                 <a class="minusscale largebtn btn black col s2">-</a><a title="def3reached" class="telestbreach largebtn btn red col s8"></a><a class="plusscale largebtn btn black col s2">+</a>
+                 <a class="minusscale largebtn btn grey col s2">-</a><a title="def4reached" class="telestbreach largebtn btn black col s8"></a><a class="plusscale largebtn btn grey col s2">+</a>
+                 <a class="minusscale largebtn btn black col s2">-</a><a title="def5reached" class="telestbreach largebtn btn pink col s8"></a><a class="plusscale largebtn btn black col s2">+</a>
             </span>
           </span>
           </div>
@@ -177,35 +174,66 @@
           <div class="row">
               <h6>Shots:</h6>
               <span class="options">
-                <a class="addtelehigh largebtn waves-effect waves-light btn green col s12">High goal</a>
-                <a class="addtelelow largebtn waves-effect waves-light btn blue col s12">Low goal</a>
-                <a class="addtelemissed largebtn waves-effect waves-light btn red col s12">Missed</a>
+                <a class="addtelehigh largebtn waves-effect waves-light btn green col s10">No High goals</a><a class="minustelehigh largebtn waves-effect waves-light btn black col s2">-</a>
+                <a class="addtelelow largebtn waves-effect waves-light btn blue col s10">No Low goals</a><a class="minustelelow largebtn waves-effect waves-light btn grey col s2">-</a>
+                <a class="addtelemissed largebtn waves-effect waves-light btn red col s10">No Missed goals</a><a class="minustelemissed largebtn waves-effect waves-light btn black col s2">-</a>
               </span>
           </div>
           </div>
         </div>
-        <div id="endgameq" class="center hidden">
-          <div class="row">
-          <h5>Does the robot reach the base of the tower?</h5>
-          <span title="BaseReached" class="option endreached col s12 btn">
-            <h4>Yes</h4>
-          </span>
-           <span title="BaseNotReached" class="option endreached col s12 btn">
-            <h4>No</h4>
-          </span>
-          </div>
-          <div class="row">
-          <h5>Does the robot scale the tower?</h5>
-          <span title="BaseScaled" class="option endscale col s12 btn">
-            <h4>Yes</h4>
-          </span>
-           <span title="BaseNotScaled" class="option endscale col s12 btn">
-            <h4>No</h4>
-          </span>
-          </div>
-        </div>
   </div>
-  <div id="GenQR" class="hidden container center topel end">
+  <div id="EndGameQ" class="center hidden topel newscreen">
+      <div class="row">
+      <h5>Does the robot reach the base of the tower?</h5>
+      <span title="BaseReached" class="option endreached col s12 btn">
+        <h4>Yes</h4>
+      </span>
+       <span title="BaseNotReached" class="option endreached col s12 btn">
+        <h4>No</h4>
+      </span>
+      <span title="BaseReachFailed" class="option endreached col s12 btn">
+        <h4>Failed</h4>
+      </span>
+      <span title="BaseScaleNA" class="option endreached col s12 btn">
+        <h4>N/A</h4>
+      </span>
+      </div>
+      <div class="row">
+      <h5>Does the robot scale the tower?</h5>
+      <span title="BaseScaled" class="option endscale col s12 btn">
+        <h4>Yes</h4>
+      </span>
+       <span title="BaseNotScaled" class="option endscale col s12 btn">
+        <h4>No</h4>
+      </span>
+       <span title="BaseScaledFailed" class="option endscale col s12 btn">
+        <h4>Failed</h4>
+      </span>
+      <span title="BaseScaledNA" class="option endscale col s12 btn">
+        <h4>N/A</h4>
+      </span>
+      </div>
+      <div class="row">
+        <h5>Did the team defend?</h5>
+        <span title="AllTimes" class="option enddef col s12 btn">
+          <h4>All</h4>
+        </span>
+        <span title="Sometimes" class="option enddef col s12 btn">
+          <h4>Sometimes</h4>
+        </span>
+        <span title="Never" class="option enddef col s12 btn">
+          <h4>Never</h4>
+        </span>
+      </div>
+      <div class="row">
+         <a class="minusspeed largebtn btn black col s2">-</a><a title="def1reached" class="largebtn btn col s8">Speed</a><a class="plusspeed largebtn btn black col s2">+</a>
+         <a class="minusmanuver largebtn btn black col s2">-</a><a title="def1reached" class="largebtn btn col s8">Maneuverability</a><a class="plusmanuver largebtn btn black col s2">+</a>
+         <a class="minusdefskill largebtn btn black col s2">-</a><a title="def1reached" class="largebtn btn col s8">Defense</a><a class="plusdefskill largebtn btn black col s2">+</a>
+         <a class="minusskill largebtn btn black col s2">-</a><a title="def1reached" class="largebtn btn col s8">Skill</a><a class="plusskill largebtn btn black col s2">+</a>
+      </div>
+      <a class="Next waves-effect waves-light btn col s12 green">Next</a>
+</div>
+  <div id="GenQR" class="hidden container center topel end newscreen">
     <div class="row">
       <div class="input-field col s12">
           <textarea id="notes" class="materialize-textarea"></textarea>

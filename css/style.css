@@ -21,3 +21,12 @@
     50% { background-color: #dd1219; }
     100% { background-color: black; }
 }
+.chosen {
+	background-color: gray !important;
+}
+.chosendef {
+	background-color: gray !important;
+}
+.ispaused {
+	background-color: yellow !important;
+}
