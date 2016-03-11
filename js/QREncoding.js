@@ -6,68 +6,73 @@ function generatepit() {
     "text": String(answerobj.teamName)+','+String(answerobj.fieldNotes),
 	});
 }
-// function generate() {
-// 		answerobj['fieldNotes'] = $('#notes').val();
-// 		var zero = String(answerobj.AutonMove);
-// 		var one = String(answerobj.EndReached);
-// 		var two = String(answerobj.EndScaled);
-// 		var three = String(answerobj.autonHighGoals);
-// 		var four = String(answerobj.autonLowGoals);
-// 		var five = String(answerobj.autonMissedGoals);
-// 		var six = findautondefs();
-// 		var seven = finddefs();
-// 		var eight = answerobj.fieldNotes.replace(/,/g , ".");
-// 		var nine = String(answerobj.matchNum);
-// 		var ten = String(answerobj.teleHighGoals);
-// 		var eleven = String(answerobj.teleLowGoals);
-// 		var twelve = String(answerobj.teleMissedGoals);
-// 		var thirteen = findtelebreached();
-// 		var fourteen = checkside();
-// 		var fifteen = String(answerobj.teamNum);
-// 		var fin = String(zero+','+one+','+two+','+three+','+four+','+five+','+six+','+seven+','+eight+','+nine+','+ten+','+eleven+','+twelve+','+thirteen+','+fourteen+','+fifteen+','+name);
-// 		$('#qrcode').html("")
-// 		$('#qrcode').qrcode({
-// 	    "text": fin,
-// 		});
-// 		console.log(answerobj);
-// 		console.log(fin);
-// }
+
 function generate() {
+	//Pre-game vars
+	$('#pre-game').children().find(".Writenval").each(function(){
+			if ($(this).attr('title') == "teamNum"){
+			answerobj['teamNum'] = $(this).val();
+			}
+			else {
+				answerobj['matchNum'] = $(this).val();
+			}
+	});
+	//End Pre-game vars
+	//Auton vars
+	answerobj['autondefsbreached'] = autonbreached;
+	answerobj['autonHighGoals'] = autonhigh;
+	answerobj['autonLowGoals'] = autonlow;
+	//End Auton vars
+	//Tele vars
+	telebreached['def1reached'] = teledef1;
+	telebreached['def2reached'] = teledef2;
+	telebreached['def3reached'] = teledef3;
+	telebreached['def4reached'] = teledef4;
+	telebreached['def5reached'] = teledef5;
+	answerobj['telebreached'] = telebreached;
+	answerobj['teleHighGoals'] = telehigh;
+	answerobj['teleLowGoals'] = telelow;
+	//End Tele vars
 	answerobj['fieldNotes'] = $('#notes').val();
 	var MID = String(answerobj.matchNum); //Match ID
 	var ALLI = checkside(); //Side (R/B)
 	var SNAME = name; //Scouts Name
 	var TID = String(answerobj.teamNum); //Team ID
-	var ASB; String(spyboxyes); //If has spybox player
-	var AA = String(answerobj.AutonMove); //Auton Aproach
-	var AI = '0'; //Auton Interfered write if get around to it
+	var ASB = String(spyboxyes); //If has spybox player
+	var AA = '1'; //Auton Aproach
+	var AI = '0'; //Auton Interfered 
 	var AB = findautondefs(); //Auton Defenses Breached
 	var AHG = String(answerobj.autonHighGoals);
-	var AHGM; //Auton High goals missedSTILL NEEDS TO BE WRITTEN
+	var AHGM = String(autonmissedh); //Auton High goals missed
 	var ALG = String(answerobj.autonLowGoals);
-	var ALGM; //STILL NEEEDS TO BE CODED
+	var ALGM = String(autonmissedl); //Auton Low goals missed
 	var TB = findtelebreached(); //Tele Breached scores
 	var THG = String(answerobj.teleHighGoals); //Tele High Goals
-	var THGM; //STILL NEEDS TO BE CODED
+	var THGM = String(telemissedh); //Tele high goals missed
 	var TLG = String(answerobj.teleLowGoals);
-	var TLGM; //STILL NEEDS TO BE CODED
+	var TLGM = String(telemissedl); //Tele low missed goals
 	var EDC = String(answerobj.EndDef); //End defend courtyard 
-	var ETS; //End friendly tower strength STILL NEEDS TO BE CODED
+	var ETS = String(endtowers);//End friendly tower strength
 	var ES = String(answerobj.EndScaled); //End scaling bool
-	var ESF = String(answerobj.EndFScaled); //End failed scaling bool
+	var ESF = String(EndFScaled); //End failed scaling bool
 	var ECF = String(answerobj.EndReached); //End reached fail bool
 	var ESP = String(speed); //End Speed
 	var EM = String(manuver); //End Manuver
 	var ED = String(defskill); //End defense
 	var ESK = String(skill); //End Driver Skill
-	var EHP; //HUMANPLAYERSKILL HASENT BEEN CODED
-	var EF;//ENDFOULS
-	var ETF;//ENDTECHFOULS
-	var EYC;//ENDYELOWCARDS
-	var ERC;//ENDREDCARDS
+	var EHP = String(endhskills);//HUMANPLAYERSKILL
+	var EF = String(endfouls);//ENDFOULS
+	var ETF = String(endtech); //ENDTECHFOULS
+	var EYC = String(endycard);//ENDYELOWCARDS
+	var ERC = String(endrcard);//ENDREDCARDS
 	var EN = answerobj.fieldNotes.replace(/,/g , "."); // END NOTES
 	var fin = String(MID+","+'"'+ALLI+'"'+","+'"'+SNAME+'"'+","+TID+","+ASB+","+AA+","+AI+","+AB+","+AHG+","+AHGM+","+ALG+","+ALGM+","+TB+","+THG+","+THGM+","+EDC+","+ETS+","+ES+","+ESF+","+ECF+","+ESP+","+EM+","+ED+","+ESK+","+EHP+","+EF+","+ETF+","+EYC+","+ERC+","+'"'+EN+'"');
+	fin = fin.replace(/-1/g , "")
 	console.log(fin);
+	$('#qrcode').html("");
+	$('#qrcode').qrcode({
+    "text": String(fin),
+	});
 }
 function findautondefs() {
 	var obj = answerobj.autondefsbreached;

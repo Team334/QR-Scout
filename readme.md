@@ -17,6 +17,7 @@ A QR based Scouting system for FRC. Made for mobile web.
 - Collect.html is done! <sub>edit: no it wasn't</sub> || Work on compression of data for QR code generation || Update: Data encoding and QR generation done || Added pit scouting option **2/27/16**
 - Collection Pages officially done (for now) || reset function added to collection || all collection bugs fixed **2/28/16**
 - Been awhile since the git was updated. || as per request of the project manager there has been a total overhaul happening **3/10/16**
+- COMPITION DAY!! It's done, lots of things were changed, go look at the code to figure that out. Let's hope we win. **3/11/16**
 
 
 **Special thanks to [Kevin](https://github.com/furryfaust)**

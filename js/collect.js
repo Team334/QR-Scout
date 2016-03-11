@@ -6,6 +6,8 @@ var answerobj = {};
 	var autonlow = -1;
 	var autonmissedh = -1;
 	var autonmissedl = -1;
+	var telemissedh = -1;
+	var telemissedl = -1;
 	var telehigh = -1;
 	var telelow = -1;
 	var telemissed = -1;
@@ -18,12 +20,10 @@ var answerobj = {};
 	var checktraps;
 	var inithtml;
 	var side;
-	var paused = 0;
-	var pausedval;
-	var timernum;
-	var ct;
-	var time;
-	var ths;
+	// var timernum;
+	// var ct;
+	// var time;
+	// var ths;
 	var speed = -1;
 	var manuver = -1;
 	var defskill = -1;
@@ -31,12 +31,31 @@ var answerobj = {};
 	var endreachedck = 0;
 	var endscaledck = 0;
 	var enddefck = 0;
+	var endtowers = 0;
 	var spyboxyes = 0;
+	var endhskills = 0;
+	var endfouls = 0;
+	var endtech = 0;
+	var endycard = 0;
+	var endrcard = 0;
+	var EndFScaled = 0;
 $(document).ready(ready);
 	function ready() {
-	//Init loading slideUp
-	$.mobile.loading().slideUp();
+	//Init loading hide
+	$.mobile.loading().hide();
 	//Init array that holds values of multchoice
+	$('.minusred').click(minusrcard);
+	$('.plusred').click(plusrcard);
+	$('.minusyellow').click(minusycard);
+	$('.plusyellow').click(plusycard);
+	$('.minustech').click(minustech);
+	$('.plustech').click(plustech);
+	$('.minusfouls').click(minusfouls);
+	$('.plusfouls').click(plusfouls);
+	$('.minushskill').click(minushskill);
+	$('.plushskill').click(plushskill);
+	$('.minustower').click(minustower);
+	$('.plustower').click(plustower);
 	$('.minusspeed').click(minusspeed);
 	$('.plusspeed').click(plusspeed);
 	$('.minusmanuver').click(minusmanuver);
@@ -47,21 +66,22 @@ $(document).ready(ready);
 	$('.plusskill').click(plusskill);
 	$('.minusscale').click(minusdefscore);
 	$('.plusscale').click(plusdefscore);
-	$('.minusautonmissed').click(minusautonmissed);
 	$('.minusautonlow').click(minusautonlow);
 	$('.minusautonhigh').click(minusautonhigh);
+	$('.minusautonmissed').click(minusautonmissed);
 	$('.minustelemissed').click(minustelemissed);
 	$('.minustelelow').click(minustelelow);
 	$('.minustelehigh').click(minustelehigh);
-	$('.back').click(goback);
-	$(".brand-logo").click(pause);
 	$(".Next").click(nexts);
 	$(".checkable").click(select);
 	$(".checkabledef").click(selectdef);
 	$(".autonbreach").click(addtoautonbreached);
 	$(".goaway").click(goaway);
 	$(".waitfortele").click(waitfortele);
-	$(".startauton").click({timernum: 65, ths: '#ContToAuton', tme: 0}, changetimer);
+	$('.gotoAuton').click(gotoAuton);
+	$('.gotoTele').click(gotoTele);
+	$('.gotoEnd').click(gotoEnd);
+	// $(".startauton").click({timernum: 10, ths: '#ContToAuton', tme: 0}, changetimer);
 	$(".addautonhigh").click(addautonhigh);
 	$(".addautonlow").click(addautonlow);
 	$(".addautonmissed").click(addautonmissed);
@@ -81,9 +101,47 @@ $(document).ready(ready);
 	if (defs[3]) {
 		clearInterval(checktraps);
 		answerobj['defs'] = defs;
-		$('.back').hide();
-		contToAuton();
+		$('.gotoAuton').html('Auton');
+		$('.gotoTele').html('Tele');
+		$('.gotoEnd').html('End')
+		gotoTele();
+		gotoAuton();
 	}}, 100);
+	}
+	function gotoAuton() {
+		var arrnum = 0;
+		$('.defbreachedtele > .options').children().each(function() {
+			if ($(this).hasClass('telestbreach') && $(this).attr('title') != 'def1reached') {
+				$(this).html(defs[arrnum]);
+				arrnum++;
+			}
+		});
+		$('.active').hide();
+		$('.topAuton').show();
+		$('.active').removeClass('active');
+		$('.topAuton').addClass('active');
+
+	}
+	function gotoTele() {
+		var arrnum = 0;
+		$('.defbreached > .options').children().each(function() {
+			if ($(this).attr('title') != 'a') {
+				$(this).html(defs[arrnum]);
+				arrnum++;
+			}
+		});
+		$('.topTele').show();
+		$('.active').hide();
+		$('.active').removeClass('active');
+		$('.topTele').addClass('active');
+		
+	}
+	function gotoEnd() {
+		$('.topEnd').show();
+		$('.active').hide();
+		$('.active').removeClass('active');
+		$('.topEnd').addClass('active');
+		
 	}
 	function nexts() {
 		$(this).closest('.topel').slideUp(400);
@@ -91,88 +149,86 @@ $(document).ready(ready);
 		$(this).closest('.topel').removeClass('active');
 		$(this).closest('.topel').next().addClass('active');
 	}
-	function contToAuton() {
-		$('.lastpregame').closest('.topel').slideUp(400);
-		$('.topAuton').show(200);
-		$('#pre-game').children().find(".Writenval").each(function(){
-			if ($(this).attr('title') == "teamNum"){
-			answerobj['teamNum'] = $(this).val();
-			}
-			else {
-				answerobj['matchNum'] = $(this).val();
-			}
-		});
-		//$('.defbreached > h5').find("[title='def2reached'").html(answerobj[]);
-		var arrnum = 0;
-		$('.defbreached > .options').children().each(function() {
-			if ($(this).attr('title') != 'a') {
-				$(this).html(defs[arrnum]);
-				arrnum++;
-			}
-		})
-	}
-	function contToTele() {
-		changetimer({data: {timernum: 15, ths: '#ContToTele', time: 1}});
-		answerobj['autondefsbreached'] = autonbreached;
-		answerobj['autonHighGoals'] = autonhigh;
-		answerobj['autonLowGoals'] = autonlow;
-		answerobj['autonMissedGoals'] = autonmissed;
-		$('.topTele').show(200);
-		var arrnum = 0;
-		$('.defbreachedtele > .options').children().each(function() {
-			if ($(this).hasClass('telestbreach') && $(this).attr('title') != 'def1reached') {
-				$(this).html(defs[arrnum]);
-				arrnum++;
-			}
-		})
-	}
-	function contToEnd() {
-		telebreached['def1reached'] = teledef1;
-		telebreached['def2reached'] = teledef2;
-		telebreached['def3reached'] = teledef3;
-		telebreached['def4reached'] = teledef4;
-		telebreached['def5reached'] = teledef5;
-		answerobj['telebreached'] = telebreached;
-		answerobj['teleHighGoals'] = telehigh;
-		answerobj['teleLowGoals'] = telelow;
-		answerobj['teleMissedGoals'] = telemissed;
-		$('#EndGameQ').slideDown(400);
-	}
+	// function contToAuton() {
+	// 	$('.lastpregame').closest('.topel').slideUp(400);
+	// 	$('.topAuton').show(200);
+	// 	$('#pre-game').children().find(".Writenval").each(function(){
+	// 		if ($(this).attr('title') == "teamNum"){
+	// 		answerobj['teamNum'] = $(this).val();
+	// 		}
+	// 		else {
+	// 			answerobj['matchNum'] = $(this).val();
+	// 		}
+	// 	});
+	// 	//$('.defbreached > h5').find("[title='def2reached'").html(answerobj[]);
+	// 	var arrnum = 0;
+	// 	$('.defbreached > .options').children().each(function() {
+	// 		if ($(this).attr('title') != 'a') {
+	// 			$(this).html(defs[arrnum]);
+	// 			arrnum++;
+	// 		}
+	// 	})
+	// }
+	// function contToTele() {
+	// 	changetimer({data: {timernum: 15, ths: '#ContToTele', time: 1}});
+	// 	answerobj['autondefsbreached'] = autonbreached;
+	// 	answerobj['autonHighGoals'] = autonhigh;
+	// 	answerobj['autonLowGoals'] = autonlow;
+	// 	$('.topTele').show(200);
+	// 	var arrnum = 0;
+	// 	$('.defbreachedtele > .options').children().each(function() {
+	// 		if ($(this).hasClass('telestbreach') && $(this).attr('title') != 'def1reached') {
+	// 			$(this).html(defs[arrnum]);
+	// 			arrnum++;
+	// 		}
+	// 	})
+	// }
+	// function contToEnd() {
+	// 	telebreached['def1reached'] = teledef1;
+	// 	telebreached['def2reached'] = teledef2;
+	// 	telebreached['def3reached'] = teledef3;
+	// 	telebreached['def4reached'] = teledef4;
+	// 	telebreached['def5reached'] = teledef5;
+	// 	answerobj['telebreached'] = telebreached;
+	// 	answerobj['teleHighGoals'] = telehigh;
+	// 	answerobj['teleLowGoals'] = telelow;
+	// 	$('#EndGameQ').slideDown(400);
+	// }
 
-	function changetimer(event) {
-		$('.nav-wrapper').removeClass('flash');
-		timernum = event.data.timernum;
-		ths = event.data.ths;
-		time = event.data.tme;
-		$(".brand-logo").html(timernum + " Seconds remaining");
-		timernum = timernum - 1;
-		 ct = setInterval(function() {
-			var secremain = (timernum == 1 ) ? " Second remaining" : " Seconds remaining";
-			$(".brand-logo").html(timernum + secremain);
-			timernum--;
-			if (timernum < 0 && time == 0){
-				clearInterval(ct);
-				$(ths).slideUp();
-				contToTele();
-			}
-			else if (timernum < 16 && time != 0) {
-				if (timernum <= 5){
-				$('.nav-wrapper').addClass('flash');
-				}
-				if (timernum < 0 && time != 0) {
-					$('#endgameq').slideDown(400);
-					clearInterval(ct);
-					$(ths).slideUp();
-					$(".brand-logo").html("LAR");
-					$('.nav-wrapper').removeClass('flash');
-					contToEnd();
-				}
-			}
-			else if (timernum <= 5){
-				$('.nav-wrapper').addClass('flash');
-			}
-		},1000);
-	}
+	// function changetimer(event) {
+	// 	$('.nav-wrapper').removeClass('flash');
+	// 	timernum = event.data.timernum;
+	// 	ths = event.data.ths;
+	// 	time = event.data.tme;
+	// 	$(".brand-logo").html(timernum + " Seconds remaining");
+	// 	timernum = timernum - 1;
+	// 	 ct = setInterval(function() {
+	// 		var secremain = (timernum == 1 ) ? " Second remaining" : " Seconds remaining";
+	// 		$(".brand-logo").html(timernum + secremain);
+	// 		timernum--;
+	// 		if (timernum < 0 && time == 0){
+	// 			clearInterval(ct);
+	// 			$(ths).slideUp();
+	// 			contToTele();
+	// 		}
+	// 		else if (timernum < 16 && time != 0) {
+	// 			if (timernum <= 5){
+	// 			$('.nav-wrapper').addClass('flash');
+	// 			}
+	// 			if (timernum < 0 && time != 0) {
+	// 				$('#endgameq').slideDown(400);
+	// 				clearInterval(ct);
+	// 				$(ths).slideUp();
+	// 				$(".brand-logo").html("LAR");
+	// 				$('.nav-wrapper').removeClass('flash');
+	// 				contToEnd();
+	// 			}
+	// 		}
+	// 		else if (timernum <= 5){
+	// 			$('.nav-wrapper').addClass('flash');
+	// 		}
+	// 	},1000);
+	// }
 	function waitfortele () {
 		$("#ContToTele").html('<h1 class="center">Please wait for this mode to end</h1>');
 	}
@@ -188,7 +244,7 @@ $(document).ready(ready);
 		$(this).text(autonlow+" Low Goals");
 	}
 	function addautonmissed() {
-		var thistitle = $(this).next().attr('title');
+		var thistitle = $(this).attr('title');
 		if(thistitle == 'high'){
 			autonmissedh++;
 			$(this).text(autonmissedh+" MissedH Goals");
@@ -212,7 +268,7 @@ $(document).ready(ready);
 		else $(this).next().text(autonlow+" Low Goals");
 	}
 	function minusautonmissed() {
-		var thistitle = $(this).next().attr('title');
+		var thistitle = $(this).attr('title');
 		if(thistitle == 'high'){
 			autonmissedh--;
 			if(autonmissedh < -1) autonmissedh = -1;
@@ -221,7 +277,7 @@ $(document).ready(ready);
 		}
 		if(thistitle == 'low'){
 			autonmissedl--;
-			if(autonmissedh < -1) autonmissedl = -1;
+			if(autonmissedl < -1) autonmissedl = -1;
 			if (autonmissedl == -1) $(this).next().text("MissedL Goals");
 			else $(this).next().text(autonmissedl);
 		}
@@ -235,26 +291,43 @@ $(document).ready(ready);
 		$(this).text(telelow+" Low Goals");
 	}
 	function addtelemissed() {
-		telemissed++;
-		$(this).text(telemissed+" Missed Goals");
+		var thistitle = $(this).attr('title');
+		if(thistitle == 'high'){
+			telemissedh++;
+			$(this).text(telemissedh+" MissedH Goals");
+		}
+		if(thistitle == 'low'){
+			telemissedl++;
+			$(this).text(telemissedl+" MissedL Goals");
+			
+		}
 	}
 	function minustelehigh() {
 		telehigh--;
 		if(telehigh < -1) telehigh = -1;
-		if(telehigh == -1) $(this).prev().text("No High Goals");
-		else $(this).prev().text(telehigh+" High Goals");
+		if(telehigh == -1) $(this).next().text("No High Goals");
+		else $(this).next().text(telehigh+" High Goals");
 	}
 	function minustelelow() {
 		telelow--;
 		if(telelow < -1) telelow = -1;
-		if(telelow == -1) $(this).prev().text("No Low Goals");
-		else $(this).prev().text(telelow+" Low Goals");
+		if(telelow == -1) $(this).next().text("No Low Goals");
+		else $(this).next().text(telelow+" Low Goals");
 	}
 	function minustelemissed() {
-		telemissed--;
-		if(telemissed < -1) telemissed = -1;
-		if(telemissed == -1) $(this).prev().text("No Missed Goals");
-		else $(this).prev().text(telemissed+" Missed Goals");
+		var thistitle = $(this).next().attr('title');
+		if(thistitle == 'high'){
+			telemissedh--;
+			if(telemissedh < -1) telemissedh = -1;
+			if (telemissedh == -1) $(this).next().text("MissedH Goals");
+			else $(this).next().text(telemissedh);
+		}
+		if(thistitle == 'low'){
+			telemissedl--;
+			if(telemissedl < -1) telemissedl = -1;
+			if (telemissedl == -1) $(this).next().text("MissedL Goals");
+			else $(this).next().text(telemissedl);
+		}
 	}
 	function minusdefscore(){
 		var thistitle = $(this).next().attr('title');
@@ -265,47 +338,47 @@ $(document).ready(ready);
 			}
 			else {
 				teledef1--;
-				$(this).next().html("LowBar"+teledef1);
+				$(this).next().html("LowBar"+" "+teledef1);
 			}
 		}
 		if(thistitle == 'def2reached'){
 			if(teledef2 <= 0) {
 				teledef2 = -1;
-				$(this).next().html(defs[0]+"N/A");
+				$(this).next().html(defs[0]+" "+"N/A");
 			}
 			else {
 				teledef2--;
-				$(this).next().html(defs[0]+teledef3);
+				$(this).next().html(defs[0]+" "+teledef3);
 			}
 		}
 		if(thistitle == 'def3reached'){
 			if(teledef3 <= 0) {
 				teledef3 = -1;
-				$(this).next().html(defs[1]+"N/A");
+				$(this).next().html(defs[1]+" "+"N/A");
 			}
 			else {
 				teledef3--;
-				$(this).next().html(defs[1]+teledef3);
+				$(this).next().html(defs[1]+" "+teledef3);
 			}
 		}
 		if(thistitle == 'def4reached'){
 		 	if(teledef4 <= 0) {
 				teledef4 = -1;
-				$(this).next().html(defs[2]+"N/A");
+				$(this).next().html(defs[2]+" "+"N/A");
 			}
 			else {
 				teledef4--;
-				$(this).next().html(defs[2]+teledef4);
+				$(this).next().html(defs[2]+" "+teledef4);
 			}
 		}
 		if(thistitle == 'def5reached'){
 			if(teledef5 <= 0) {
 				teledef5 = -1;
-				$(this).next().html(defs[3]+"N/A");
+				$(this).next().html(defs[3]+" "+"N/A");
 			}
 			else {
 				teledef5--;
-				$(this).next().html(defs[3]+teledef5);
+				$(this).next().html(defs[3]+" "+teledef5);
 			}
 		}
 	}
@@ -318,7 +391,7 @@ $(document).ready(ready);
 			else {
 				teledef1++;
 			}
-		$(this).prev().html("LowBar"+teledef1);
+		$(this).prev().html("LowBar "+teledef1);
 		}
 		if(thistitle == 'def2reached'){
 			if(teledef2 >= 10) {
@@ -327,7 +400,7 @@ $(document).ready(ready);
 			else {
 				teledef2++;
 			}
-		$(this).prev().html(defs[0]+teledef2);
+		$(this).prev().html(defs[0]+" "+teledef2);
 		}
 		if(thistitle == 'def3reached'){
 			if(teledef3 >= 10) {
@@ -336,7 +409,7 @@ $(document).ready(ready);
 			else {
 				teledef3++;
 			}
-		$(this).prev().html(defs[1]+teledef3);
+		$(this).prev().html(defs[1]+" "+teledef3);
 		}
 		if(thistitle == 'def4reached'){
 		 	if(teledef4 >= 10) {
@@ -345,7 +418,7 @@ $(document).ready(ready);
 			else {
 				teledef4++;
 			}
-		$(this).prev().html(defs[2]+teledef4);
+		$(this).prev().html(defs[2]+" "+teledef4);
 		}
 		if(thistitle == 'def5reached'){
 			if(teledef5 >= 10) {
@@ -354,7 +427,7 @@ $(document).ready(ready);
 			else {
 				teledef5++;
 			}
-		$(this).prev().html(defs[3]+teledef5);
+		$(this).prev().html(defs[3]+" "+teledef5);
 		}
 	}
 	function select() {
@@ -386,6 +459,7 @@ $(document).ready(ready);
 	}
 	function addtoautonbreached() {
 			var thistitle = $(this).attr('title');
+
 			autonbreached.push(thistitle);
 	}
 	function selectdef() {
@@ -443,15 +517,15 @@ $(document).ready(ready);
 				$(this).parent().find('.chosen').removeClass('chosen');
 				if (thistitle == 'BaseScaled') {
 					answerobj['EndScaled'] = 1;
-					answerobj['EndFScaled'] = 0;
+					EndFScaled = 0;
 				}
 				else if(thistitle == 'BaseNotScaled') {
 					answerobj['EndScaled'] = 0;
-					answerobj['EndFScaled'] = 0;
+					EndFScaled = 0;
 				}
 				else if(thistitle == 'BaseScaleFailed')  {
 					answerobj['EndFScaled'] = 1;
-					answerobj['EndScaled'] = 0;
+					EndFScaled = 0;
 				}
 				// else if(thistitle == 'BaseScaleNA') {
 				// 	answerobj['EndScaled'] = 3;
@@ -496,6 +570,96 @@ $(document).ready(ready);
 	// var manuver;
 	// var defskill;
 	// var skill;
+	function minusrcard() {
+		endrcard--;
+		if(endrcard < -1) endrcard = -1;
+		if (endrcard == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endrcard+")");
+	}
+	function plusrcard() {
+		if(endrcard >= 30) {
+				endrcard = 30;
+			}
+			else {
+				endrcard++;
+			}
+			$(this).prev().text("("+endrcard+")");
+	}
+	function minusycard() {
+		endycard--;
+		if(endycard < -1) endycard = -1;
+		if (endycard == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endycard+")");
+	}
+	function plusycard() {
+		if(endycard >= 30) {
+				endycard = 30;
+			}
+			else {
+				endycard++;
+			}
+			$(this).prev().text("("+endycard+")");
+	}
+	function minustech() {
+		endtech--;
+		if(endtech < -1) endtech = -1;
+		if (endtech == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endtech+")");
+	}
+	function plustech() {
+		if(endtech >= 30) {
+				endtech = 30;
+			}
+			else {
+				endtech++;
+			}
+			$(this).prev().text("("+endtech+")");
+	}
+	function minusfouls() {
+		endfouls--;
+		if(endfouls < -1) endfouls = -1;
+		if (endfouls == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endfouls+")");
+	}
+	function plusfouls() {
+		if(endfouls >= 30) {
+				endfouls = 30;
+			}
+			else {
+				endfouls++;
+			}
+			$(this).prev().text("("+endfouls+")");
+	}
+	function minushskill() {
+		endhskills--;
+		if(endhskills < -1) endhskills = -1;
+		if (endhskills == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endhskills+")");
+	}
+	function plushskill() {
+		if(endhskills >= 10) {
+				endhskills = 10;
+			}
+			else {
+				endhskills++;
+			}
+			$(this).prev().text("("+endhskills+")");
+	}
+	function minustower() {
+		endtowers--;
+		if(endtowers < -1) endtowers = -1;
+		if (endtowers == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endtowers+")");
+	}
+	function plustower() {
+		if(endtowers >= 20) {
+				endtowers = 20;
+			}
+			else {
+				endtowers++;
+			}
+			$(this).prev().text("("+endtowers+")");
+	}
 	function minusspeed() {
 		speed--;
 		if(speed < -1) speed = -1;
@@ -575,33 +739,42 @@ $(document).ready(ready);
 		autonbreached = []
 		defs = []
 		telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''}
-		var autonhigh = -1;
-		var autonlow = -1;
-		var autonmissed = -1;
-		var telehigh = -1;
-		var telelow = -1;
-		var telemissed = -1;
-		var teledef1 = -1;
-		var teledef2 = -1;
-		var teledef3 = -1;
-		var teledef4 = -1;
-		var teledef5 = -1;
-		var checktraps;
-		var inithtml;
-		var side;
-		var paused = 0;
-		var pausedval;
-		var timernum;
-		var ct;
-		var time;
-		var ths;
-		var speed = -1;
-		var manuver = -1;
-		var defskill = -1;
-		var skill = -1;
-		var endreachedck = 0;
-		var endscaledck = 0;
-		var enddefck = 0;
+		autonhigh = -1;
+		autonlow = -1;
+		autonmissedh = -1;
+		autonmissedl = -1;
+		telemissedh = -1;
+		telemissedl = -1;
+		telehigh = -1;
+		telelow = -1;
+		telemissed = -1;
+		teledef1 = -1;
+		teledef2 = -1;
+		teledef3 = -1;
+		teledef4 = -1;
+		teledef5 = -1;
+		name;
+		checktraps;
+		side;
+		// timernum;
+		// ct;
+		// time;
+		// ths;
+		speed = -1;
+		manuver = -1;
+		defskill = -1;
+		skill = -1;
+		endreachedck = 0;
+		endscaledck = 0;
+		enddefck = 0;
+		endtowers = 0;
+		spyboxyes = 0;
+		endhskills = 0;
+		endfouls = 0;
+		endtech = 0;
+		endycard = 0;
+		endrcard = 0;
+		EndFScaled = 0;
 		$('#body').html(inithtml);	
 		ready();
   	}
@@ -614,47 +787,6 @@ $(document).ready(ready);
         }
     }
     return arr;
-	}
-	function pause() {
-		if(paused) {
-			$(this).removeClass('ispaused');
-			timernum = timernum - 1;
-			var secremain = (timernum == 1 ) ? " Second remaining" : " Seconds remaining";
-			$(".brand-logo").html(timernum + secremain);
-			paused = 0;
-			 ct = setInterval(function() {
-			$(".brand-logo").html(timernum + secremain);
-			timernum--;
-			if (timernum < 0 && time == 0){
-				clearInterval(ct);
-				$(ths).slideUp();
-				contToTele();
-			}
-			else if (timernum < 16 && time != 0) {
-				$('#DefencesBreachedTele').slideUp(200);
-				$('#endgameq').slideDown(400);
-				if (timernum <= 5){
-				$('.nav-wrapper').addClass('flash');
-				}
-				if (timernum < 0 && time != 0) {
-					clearInterval(ct);
-					$(ths).slideUp();
-					$(".brand-logo").html("LAR");
-					$('.nav-wrapper').removeClass('flash');
-					contToEnd();
-				}
-			}
-			else if (timernum <= 5){
-				$('.nav-wrapper').addClass('flash');
-			}
-		},1000);
-		}
-		// if(paused == 1) ct = changetimer({timernum: 10, ths: '#ContToAuton', tme: 0});
-		else if(ct) {
-			$(this).addClass('ispaused')
-			clearInterval(ct);
-			paused = 1;
-		}
 	}
 	function goback() {
 		$('.active').closest('.newscreen').slideUp(200);
