@@ -19,7 +19,6 @@ function generate() {
 	});
 	//End Pre-game vars
 	//Auton vars
-	answerobj['autondefsbreached'] = autonbreached;
 	answerobj['autonHighGoals'] = autonhigh;
 	answerobj['autonLowGoals'] = autonlow;
 	//End Auton vars
@@ -38,9 +37,9 @@ function generate() {
 	var ALLI = checkside(); //Side (R/B)
 	var SNAME = name; //Scouts Name
 	var TID = String(answerobj.teamNum); //Team ID
-	var ASB = String(spyboxyes); //If has spybox player
+	var ASB = '1' //If has spybox player
 	var AA = '1'; //Auton Aproach
-	var AI = '0'; //Auton Interfered 
+	var AI = String(answerobj.endInter); //Auton Interfered 
 	var AB = findautondefs(); //Auton Defenses Breached
 	var AHG = String(answerobj.autonHighGoals);
 	var AHGM = String(autonmissedh); //Auton High goals missed
@@ -53,6 +52,7 @@ function generate() {
 	var TLGM = String(telemissedl); //Tele low missed goals
 	var EDC = String(answerobj.EndDef); //End defend courtyard 
 	var ETS = String(endtowers);//End friendly tower strength
+	var ETSO = String(endtowerso);//End opp. tower strength
 	var ES = String(answerobj.EndScaled); //End scaling bool
 	var ESF = String(EndFScaled); //End failed scaling bool
 	var ECF = String(answerobj.EndReached); //End reached fail bool
@@ -65,9 +65,10 @@ function generate() {
 	var ETF = String(endtech); //ENDTECHFOULS
 	var EYC = String(endycard);//ENDYELOWCARDS
 	var ERC = String(endrcard);//ENDREDCARDS
-	var EN = answerobj.fieldNotes.replace(/,/g , "."); // END NOTES
-	var fin = String(MID+","+'"'+ALLI+'"'+","+'"'+SNAME+'"'+","+TID+","+ASB+","+AA+","+AI+","+AB+","+AHG+","+AHGM+","+ALG+","+ALGM+","+TB+","+THG+","+THGM+","+EDC+","+ETS+","+ES+","+ESF+","+ECF+","+ESP+","+EM+","+ED+","+ESK+","+EHP+","+EF+","+ETF+","+EYC+","+ERC+","+'"'+EN+'"');
-	fin = fin.replace(/-1/g , "")
+	var EN = answerobj.fieldNotes.replace(/,/g , ":"); // END NOTES
+	var fin = String(MID+","+'"'+ALLI+'"'+","+'"'+SNAME+'"'+","+TID+","+ASB+","+AA+","+AI+","+AB+","+AHG+","+AHGM+","+ALG+","+ALGM+","+TB+","+THG+","+THGM+","+TLG+","+TLGM+","+EDC+","+ETS+","+ETSO+","+ES+","+ESF+","+ECF+","+ESP+","+EM+","+ED+","+ESK+","+EHP+","+EF+","+ETF+","+EYC+","+ERC+","+'"'+EN+'"');
+	fin = fin.replace(/-1/g , "");
+	fin = fin.replace(/undefined/g , "");
 	console.log(fin);
 	$('#qrcode').html("");
 	$('#qrcode').qrcode({
@@ -77,15 +78,15 @@ function generate() {
 function findautondefs() {
 	var obj = answerobj.autondefsbreached;
 	var defs = answerobj.defs;
-	var port = 0;
-	var draw = 0;
-	var cheval = 0;
-	var rock = 0;
-	var moat = 0;
-	var ramp = 0;
-	var sally = 0;
-	var rough = 0;
-	var low = 0;
+	var port = "";
+	var draw = "";
+	var cheval = "";
+	var rock = "";
+	var moat = "";
+	var ramp = "";
+	var sally = "";
+	var rough = "";
+	var low = "";
 	$.each(obj, function(key, value){
 		if(key == 'def2reached'){
 			if(defs[0] == 'Portcullis') port = value; 

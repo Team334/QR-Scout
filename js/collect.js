@@ -1,5 +1,5 @@
 var answerobj = {};
-	var autondefsbreached = {'def1reached': '0' ,'def2reached': '0' ,'def3reached': '0' ,'def4reached': '0' ,'def5reached': '0'};
+	var autondefsbreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
 	var defs = [];
 	var telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
 	var autonhigh = -1;
@@ -24,7 +24,7 @@ var answerobj = {};
 	var name;
 	var checktraps;
 	var inithtml;
-	var side;
+	var side = '';
 	// var timernum;
 	// var ct;
 	// var time;
@@ -33,22 +33,24 @@ var answerobj = {};
 	var manuver = -1;
 	var defskill = -1;
 	var skill = -1;
-	var endreachedck = 0;
-	var endscaledck = 0;
-	var enddefck = 0;
-	var endtowers = 0;
-	var spyboxyes = 0;
-	var endhskills = 0;
-	var endfouls = 0;
-	var endtech = 0;
-	var endycard = 0;
-	var endrcard = 0;
-	var EndFScaled = 0;
+	var endreachedck = -1; 
+	var endscaledck = -1;
+	var endInterck = -1;
+	var enddefck = -1;
+	var endtowers = -1;
+	var endtowerso = -1;
+	var endhskills = -1;
+	var endfouls = -1;
+	var endtech = -1;
+	var endycard = -1;
+	var endrcard = -1;
+	var EndFScaled = -1;
 $(document).ready(ready);
 	function ready() {
 	//Init loading hide
 	$.mobile.loading().hide();
 	//Init array that holds values of multchoice
+	$('.endinter').click(checkendinter);
 	$('.minusred').click(minusrcard);
 	$('.plusred').click(plusrcard);
 	$('.minusyellow').click(minusycard);
@@ -61,6 +63,8 @@ $(document).ready(ready);
 	$('.plushskill').click(plushskill);
 	$('.minustower').click(minustower);
 	$('.plustower').click(plustower);
+	$('.minustowero').click(minustowero);
+	$('.plustowero').click(plustowero);
 	$('.minusspeed').click(minusspeed);
 	$('.plusspeed').click(plusspeed);
 	$('.minusmanuver').click(minusmanuver);
@@ -96,8 +100,6 @@ $(document).ready(ready);
 	$(".endscale").click(checkendscale);
 	$(".endreached").click(checkendreached);
 	$(".enddef").click(checkenddef);
-	$('.checkHPY').click(checkHPY)
-	$(".gotopit").click(pitscouting);
 	$("#nameNo").click(logout)
 	$(".Gen").click(generate);
 	$(".GenPit").click(generatepit);
@@ -106,6 +108,7 @@ $(document).ready(ready);
 	if (defs[3]) {
 		clearInterval(checktraps);
 		answerobj['defs'] = defs;
+		$('#SelectTraps').hide();
 		$('.gotoAuton').html('Auton');
 		$('.gotoTele').html('Tele');
 		$('.gotoEnd').html('End')
@@ -149,91 +152,25 @@ $(document).ready(ready);
 		
 	}
 	function nexts() {
-		$(this).closest('.topel').slideUp(400);
-		$(this).closest('.topel').next().show(200);
-		$(this).closest('.topel').removeClass('active');
-		$(this).closest('.topel').next().addClass('active');
+		if($(this).hasClass('endbeg')) {
+			if($('.teamNum').val() == "" || $('.matchNum').val() == '' || side == '') {
+				$('.turnred').addClass('rad');
+			}
+			else {
+				$(this).closest('.topel').slideUp(400);
+				$(this).closest('.topel').next().show(200);
+				$(this).closest('.topel').removeClass('active');
+				$(this).closest('#teamside').children().addClass('active');
+			}
+		}
+		else {
+			$(this).closest('.topel').slideUp(400);
+			$(this).closest('.topel').next().show(200);
+			$(this).closest('.topel').removeClass('active');
+			$(this).closest('#teamside').children().addClass('active');
+		}
 	}
-	// function contToAuton() {
-	// 	$('.lastpregame').closest('.topel').slideUp(400);
-	// 	$('.topAuton').show(200);
-	// 	$('#pre-game').children().find(".Writenval").each(function(){
-	// 		if ($(this).attr('title') == "teamNum"){
-	// 		answerobj['teamNum'] = $(this).val();
-	// 		}
-	// 		else {
-	// 			answerobj['matchNum'] = $(this).val();
-	// 		}
-	// 	});
-	// 	//$('.defbreached > h5').find("[title='def2reached'").html(answerobj[]);
-	// 	var arrnum = 0;
-	// 	$('.defbreached > .options').children().each(function() {
-	// 		if ($(this).attr('title') != 'a') {
-	// 			$(this).html(defs[arrnum]);
-	// 			arrnum++;
-	// 		}
-	// 	})
-	// }
-	// function contToTele() {
-	// 	changetimer({data: {timernum: 15, ths: '#ContToTele', time: 1}});
-	// 	answerobj['autondefsbreached'] = autonbreached;
-	// 	answerobj['autonHighGoals'] = autonhigh;
-	// 	answerobj['autonLowGoals'] = autonlow;
-	// 	$('.topTele').show(200);
-	// 	var arrnum = 0;
-	// 	$('.defbreachedtele > .options').children().each(function() {
-	// 		if ($(this).hasClass('telestbreach') && $(this).attr('title') != 'def1reached') {
-	// 			$(this).html(defs[arrnum]);
-	// 			arrnum++;
-	// 		}
-	// 	})
-	// }
-	// function contToEnd() {
-	// 	telebreached['def1reached'] = teledef1;
-	// 	telebreached['def2reached'] = teledef2;
-	// 	telebreached['def3reached'] = teledef3;
-	// 	telebreached['def4reached'] = teledef4;
-	// 	telebreached['def5reached'] = teledef5;
-	// 	answerobj['telebreached'] = telebreached;
-	// 	answerobj['teleHighGoals'] = telehigh;
-	// 	answerobj['teleLowGoals'] = telelow;
-	// 	$('#EndGameQ').slideDown(400);
-	// }
-
-	// function changetimer(event) {
-	// 	$('.nav-wrapper').removeClass('flash');
-	// 	timernum = event.data.timernum;
-	// 	ths = event.data.ths;
-	// 	time = event.data.tme;
-	// 	$(".brand-logo").html(timernum + " Seconds remaining");
-	// 	timernum = timernum - 1;
-	// 	 ct = setInterval(function() {
-	// 		var secremain = (timernum == 1 ) ? " Second remaining" : " Seconds remaining";
-	// 		$(".brand-logo").html(timernum + secremain);
-	// 		timernum--;
-	// 		if (timernum < 0 && time == 0){
-	// 			clearInterval(ct);
-	// 			$(ths).slideUp();
-	// 			contToTele();
-	// 		}
-	// 		else if (timernum < 16 && time != 0) {
-	// 			if (timernum <= 5){
-	// 			$('.nav-wrapper').addClass('flash');
-	// 			}
-	// 			if (timernum < 0 && time != 0) {
-	// 				$('#endgameq').slideDown(400);
-	// 				clearInterval(ct);
-	// 				$(ths).slideUp();
-	// 				$(".brand-logo").html("LAR");
-	// 				$('.nav-wrapper').removeClass('flash');
-	// 				contToEnd();
-	// 			}
-	// 		}
-	// 		else if (timernum <= 5){
-	// 			$('.nav-wrapper').addClass('flash');
-	// 		}
-	// 	},1000);
-	// }
+	
 	function waitfortele () {
 		$("#ContToTele").html('<h1 class="center">Please wait for this mode to end</h1>');
 	}
@@ -263,13 +200,13 @@ $(document).ready(ready);
 	function minusautonhigh() {
 		autonhigh--;
 		if(autonhigh < -1) autonhigh = -1;
-		if (autonhigh == -1) $(this).next().text("No High Goals");
+		if (autonhigh == -1) $(this).next().text("High Goals");
 		else $(this).next().text(autonhigh+" High Goals");
 	}
 	function minusautonlow() {
 		autonlow--;
 		if(autonlow < -1) autonlow = -1;
-		if (autonlow == -1) $(this).next().text("No Low Goals");
+		if (autonlow == -1) $(this).next().text("Low Goals");
 		else $(this).next().text(autonlow+" Low Goals");
 	}
 	function minusautonmissed() {
@@ -310,13 +247,13 @@ $(document).ready(ready);
 	function minustelehigh() {
 		telehigh--;
 		if(telehigh < -1) telehigh = -1;
-		if(telehigh == -1) $(this).next().text("No High Goals");
+		if(telehigh == -1) $(this).next().text("High Goals");
 		else $(this).next().text(telehigh+" High Goals");
 	}
 	function minustelelow() {
 		telelow--;
 		if(telelow < -1) telelow = -1;
-		if(telelow == -1) $(this).next().text("No Low Goals");
+		if(telelow == -1) $(this).next().text("Low Goals");
 		else $(this).next().text(telelow+" Low Goals");
 	}
 	function minustelemissed() {
@@ -465,15 +402,15 @@ $(document).ready(ready);
 	function addtoautonbreached() {
 			var thistitle = $(this).attr('title');
 			if(thistitle == 'def1reached' && autondef1 == 1){ autondef1 = 0; $(this).removeClass('chosen');}
-			else if(thistitle == 'def1reached' && autondef1 == 0){autondef1 = 1; $(this).addClass('chosen');}
+			else if(thistitle == 'def1reached' && (autondef1 == 0 || autondef1 == '')){autondef1 = 1; $(this).addClass('chosen');}
 			if(thistitle == 'def2reached' && autondef2 == 1){ autondef2 = 0; $(this).removeClass('chosen');}
-			else if(thistitle == 'def2reached' && autondef2 == 0){ autondef2 = 1; $(this).addClass('chosen');}
+			else if(thistitle == 'def2reached' && (autondef2 == 0 || autondef2 == '')){ autondef2 = 1; $(this).addClass('chosen');}
 			if(thistitle == 'def3reached' && autondef3 == 1){ autondef3 = 0; $(this).removeClass('chosen');}
-			else if(thistitle == 'def3reached' && autondef3 == 0){ autondef3 = 1; $(this).addClass('chosen');}
+			else if(thistitle == 'def3reached' && (autondef3 == 0 || autondef3 == '')){ autondef3 = 1; $(this).addClass('chosen');}
 			if(thistitle == 'def4reached' && autondef4 == 1){ autondef4 = 0; $(this).removeClass('chosen');}
-			else if(thistitle == 'def4reached' && autondef4 == 0){ autondef4 = 1; $(this).addClass('chosen');}
+			else if(thistitle == 'def4reached' && (autondef4 == 0 || autondef4 == '')){ autondef4 = 1; $(this).addClass('chosen');}
 			if(thistitle == 'def5reached' && autondef5 == 1){ autondef5 = 0; $(this).removeClass('chosen');}
-			else if(thistitle == 'def5reached' && autondef5 == 0){ autondef5 = 1; $(this).addClass('chosen');}
+			else if(thistitle == 'def5reached' && (autondef5 == 0 || autondef5 == '')){ autondef5 = 1; $(this).addClass('chosen');}
 	}
 	function selectdef() {
 			if ($(this).hasClass('chosendef')) {
@@ -507,7 +444,7 @@ $(document).ready(ready);
 				// }
 				$(this).addClass('chosen');
 			}
-			else if (endreachedck == 0){
+			else if (endreachedck == -1){
 				if (thistitle == 'BaseReached') {
 					answerobj['EndReached'] = 1;
 				}
@@ -521,6 +458,29 @@ $(document).ready(ready);
 					answerobj['EndReached'] = 3;
 				}
 				endreachedck = 1;
+				$(this).addClass('chosen');
+			}
+	}
+	function checkendinter() {
+			var thistitle = $(this).attr('title');
+			if(endInterck == 1) {
+				$(this).parent().find('.chosen').removeClass('chosen');
+				if (thistitle == 'Inter') {
+					answerobj['endInter'] = 1;
+				}
+				else if(thistitle == 'NoInter') {
+					answerobj['endInter'] = 0;
+				}
+				$(this).addClass('chosen');
+			}
+			else if(endInterck == -1) {
+				if (thistitle == 'Inter') {
+					answerobj['endInter'] = 1;
+				}
+				else if(thistitle == 'NoInter') {
+					answerobj['endInter'] = 0;
+				}
+				endInterck = 1;
 				$(this).addClass('chosen');
 			}
 	}
@@ -545,7 +505,7 @@ $(document).ready(ready);
 				// }
 				$(this).addClass('chosen');
 			}
-			else if(endscaledck == 0) {
+			else if(endscaledck == -1) {
 				if (thistitle == 'BaseScaled') {
 					answerobj['EndScaled'] = 1;
 				}
@@ -564,7 +524,7 @@ $(document).ready(ready);
 	}
 	function checkenddef() {
 			var thistitle = $(this).attr('title');
-			if(enddefck == 0){
+			if(enddefck == -1){
 				$(this).parent().find('.chosen').removeClass('chosen');
 				if (thistitle == 'AllTimes') answerobj['EndDef'] = 3;
 				if (thistitle == 'Sometimes') answerobj['EndDef'] = 2;
@@ -646,8 +606,8 @@ $(document).ready(ready);
 	function minushskill() {
 		endhskills--;
 		if(endhskills < -1) endhskills = -1;
-		if (endhskills == -1) $(this).next().text("(N/A)");
-		else $(this).next().text("("+endhskills+")");
+		if (endhskills == -1) $(this).next().text("(N/A) Human");
+		else $(this).next().text("("+endhskills+") Human");
 	}
 	function plushskill() {
 		if(endhskills >= 10) {
@@ -656,7 +616,7 @@ $(document).ready(ready);
 			else {
 				endhskills++;
 			}
-			$(this).prev().text("("+endhskills+")");
+			$(this).prev().text("("+endhskills+") Human");
 	}
 	function minustower() {
 		endtowers--;
@@ -672,6 +632,21 @@ $(document).ready(ready);
 				endtowers++;
 			}
 			$(this).prev().text("("+endtowers+")");
+	}
+	function minustowero() {
+		endtowerso--;
+		if(endtowerso < -1) endtowerso = -1;
+		if (endtowerso == -1) $(this).next().text("(N/A)");
+		else $(this).next().text("("+endtowerso+")");
+	}
+	function plustowero() {
+		if(endtowerso >= 20) {
+				endtowerso = 20;
+			}
+			else {
+				endtowerso++;
+			}
+			$(this).prev().text("("+endtowerso+")");
 	}
 	function minusspeed() {
 		speed--;
@@ -721,8 +696,8 @@ $(document).ready(ready);
 	function minusskill() {
 		skill--;
 		if(skill < -1) skill = -1;
-		if (skill == -1) $(this).next().text("(N/A) Skill");
-		else $(this).next().text("("+skill+") Skill");
+		if (skill == -1) $(this).next().text("(N/A) Driver");
+		else $(this).next().text("("+skill+") Driver");
 	}
 	function plusskill() {
 		if(skill >= 10) {
@@ -731,16 +706,9 @@ $(document).ready(ready);
 			else {
 				skill++;
 			}
-			$(this).prev().text("("+skill+") Skill");
+			$(this).prev().text("("+skill+") Driver");
 	}
-	function pitscouting() {
-		answerobj['teamName'] = $('#pre-game').children().find(".teamNum").val();
-		$('#pre-game').hide(200);
-		$('#GenQR').show(200);
-		$('.Gen').hide(200);
-		$('.GenPit').show(200);
 
-	}
 	function logout() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -749,9 +717,9 @@ $(document).ready(ready);
   	}
   	function reset() {
   		answerobj = {};
+		autondefsbreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
+		defs = [];
 		telebreached = {'def1reached': '' ,'def2reached': '' ,'def3reached': '' ,'def4reached': '' ,'def5reached': ''};
-		defs = []
-		autondefsbreached = {'def1reached': '0' ,'def2reached': '0' ,'def3reached': '0' ,'def4reached': '0' ,'def5reached': '0'}
 		autonhigh = -1;
 		autonlow = -1;
 		autonmissedh = -1;
@@ -766,9 +734,14 @@ $(document).ready(ready);
 		teledef3 = -1;
 		teledef4 = -1;
 		teledef5 = -1;
+		autondef1 = 0;
+		autondef2 = 0;
+		autondef3 = 0;
+		autondef4 = 0;
+		autondef5 = 0;
 		name;
 		checktraps;
-		side;
+		side = '';
 		// timernum;
 		// ct;
 		// time;
@@ -777,17 +750,18 @@ $(document).ready(ready);
 		manuver = -1;
 		defskill = -1;
 		skill = -1;
-		endreachedck = 0;
-		endscaledck = 0;
-		enddefck = 0;
-		endtowers = 0;
-		spyboxyes = 0;
-		endhskills = 0;
-		endfouls = 0;
-		endtech = 0;
-		endycard = 0;
-		endrcard = 0;
-		EndFScaled = 0;
+		endreachedck = -1; 
+		endscaledck = -1;
+		endInterck = -1;
+		enddefck = -1;
+		endtowers = -1;
+		endtowerso = -1;
+		endhskills = -1;
+		endfouls = -1;
+		endtech = -1;
+		endycard = -1;
+		endrcard = -1;
+		EndFScaled = -1;
 		$('#body').html(inithtml);	
 		ready();
   	}
@@ -804,15 +778,5 @@ $(document).ready(ready);
 	function goback() {
 		$('.active').closest('.newscreen').slideUp(200);
 		$('.active').closest('.newscreen').prev().show(200);
-	}
-	function checkHPY() {
-		if(spyboxyes == 1){
-		 $(this).removeClass('chosen');
-		 spyboxyes = 0;
-		}
-		else {
-			$(this).addClass('chosen');
-			spyboxyes = 1;
-		}
 	}
 
